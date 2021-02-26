@@ -1,0 +1,37 @@
+[[plugins]]
+repo = 'Shougo/deoplete.nvim'
+depends = 'context_filetype.vim'
+hook_add = """
+source ~/.config/nvim/plugins/deoplete.rc.vim
+"""
+
+[[plugins]]
+repo = 'Shougo/denite.nvim'
+hook_add = """
+source ~/.config/nvim/plugins/denite.rc.vim
+"""
+
+[[plugins]]
+repo = 'autozimu/LanguageClient-neovim'
+build = ['./install.sh']
+hook_add = """
+source ~/.config/nvim/plugins/language-client.rc.vim
+"""
+
+[[plugins]]
+repo = 'rhysd/vim-clang-format'
+hook_add = """
+source ~/.config/nvim/plugins/vim-clang-format.rc.vim
+"""
+
+[[plugins]]
+repo = 'kana/vim-operator-user'
+hook_add = """
+source ~/.config/nvim/plugins/vim-operator-user.rc.vim
+"""
+
+[[plugins]]
+repo = 'cohama/lexima.vim'
+hook_add = """
+source ~/.config/nvim/plugins/lexima.rc.vim
+"""

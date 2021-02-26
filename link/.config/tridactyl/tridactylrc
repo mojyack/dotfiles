@@ -1,0 +1,26 @@
+#set smoothscroll true
+
+colourscheme dark
+
+bind J scrollpage 1
+bind K scrollpage -1
+bind a hint -t
+bind ;; hint -;
+bind z back
+bind x forward
+bind m mute toggle
+bind t tabopen
+bind q tabclose
+bind d tabduplicate
+bind Q undo tab
+bind <C-l> tabnext
+bind <C-h> tabprev
+bind e tabnext
+bind w tabprev
+bind <C-PageDown> tabmove +1
+bind <C-PageUp> tabmove -1
+bind / fillcmdline find
+bind n findnext 1
+bind N findnext -1
+bind A fillcmdline bmarks
+bind ,<Space> clearsearchhighlight

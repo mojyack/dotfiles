@@ -1,0 +1,108 @@
+#!/bin/bash
+
+usage_exit() {
+    echo "Usage: $0 [-y] [-u undo_script_path] target" 1>&2
+    exit 1
+}
+
+declare -i SKIP_CONFIRM
+declare    UNDO_SCRIPT_PATH
+
+while getopts yu:h OPT
+do
+    case "$OPT" in
+        y)  SKIP_CONFIRM=1
+            ;;
+        u)  UNDO_SCRIPT_PATH="$OPTARG"
+            ;;
+        h)  usage_exit
+            ;;
+        \?) usage_exit
+            ;;
+    esac
+done
+
+shift $((OPTIND - 1))
+
+if [[ ! -e "${1}" ]]; then
+    usage_exit
+fi
+
+declare    base_path="${1}"
+declare -A tasks
+declare -a dirs
+
+if [[ "${base_path: -1}" != "/" ]]; then
+    base_path=${base_path}/
+fi
+
+list_files(){
+    declare -ar list=($(find "${1}" -maxdepth 1 | sed 1d | awk '{print length() ,$0}' | sort -n | cut -d" " -f2-))
+    declare -i  count=1
+    for ((i = 0; i < ${#list[@]}; i++)); do
+        if [ -d "${list[$i]}" ]; then
+            dirs=("${dirs[@]}" "${list[$i]}")
+            declare -i index_bak=${i}
+            list_files "${list[$i]}";
+            i=${index_bak}
+        else
+            declare path="${list[$i]}"
+            path=${path#${base_path}}
+            if [[ ! ${path} == *"/"* ]]; then
+                path=""
+            else
+                path=${path%/*}
+            fi
+
+            declare ext=$(echo "${list[i]##*.}")
+            if [[ $(basename "${list[$i]}") == *"."* ]]; then
+                ext=.${ext}
+            else
+                ext=""
+            fi
+
+            tasks["${list[$i]}"]=${base_path}$(echo "${path}" | tr -d /)$(printf %03d ${count})${ext}
+            count=count+1
+        fi
+    done
+}
+
+echo "Entering" "$1"
+declare IFS_BAK=${IFS}
+IFS=$'\n'
+list_files "$1"
+IFS=${IFS_BAK}
+
+if [[ ${SKIP_CONFIRM} != 1 ]]; then
+    for t in "${!tasks[@]}"; do
+        echo "${t}"  "${tasks[${t}]}"
+    done
+
+    read -n1 -p "ok? (y/N): " yn
+    echo
+    if [[ ! $yn = [yY] ]]; then
+        echo "exited."
+        exit 0
+    fi
+fi
+
+for t in "${!tasks[@]}"; do
+    mv "${t}"  "${tasks[${t}]}"
+done
+
+for ((i=${#dirs[@]}-1; i>=0; i--)); do
+    rmdir "${dirs[$i]}"
+done
+
+if [[ ${UNDO_SCRIPT_PATH} != "" ]]; then
+    echo "#!/bin/bash" > "${UNDO_SCRIPT_PATH}"
+    for d in "${dirs[@]}"; do
+        echo mkdir "${d}" >> "${UNDO_SCRIPT_PATH}"
+    done
+
+    for t in "${!tasks[@]}"; do
+        echo mv "${tasks[${t}]}" "${t}" >> "${UNDO_SCRIPT_PATH}"
+    done
+fi
+
+echo "done."

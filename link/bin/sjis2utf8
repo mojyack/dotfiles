@@ -1,0 +1,10 @@
+#/usr/bin/bash
+
+if [ ! -e "$1" ]; then
+    echo "no such file."
+    return 1
+fi
+
+tmp="$1".old
+mv "$1" "$tmp"
+iconv -f SHIFT_JIS -t UTF-8 "$tmp" > "$1"

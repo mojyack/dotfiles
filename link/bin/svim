@@ -1,0 +1,10 @@
+#/usr/bin/zsh
+
+if [ ! -f "$1" ]; then
+    echo "no such file."
+    exit 1
+fi
+temp_name="/tmp/$(basename "$1")"
+cp "$1" "$temp_name"
+nvim "$temp_name"
+sudo mv -i "$temp_name" "$1"
