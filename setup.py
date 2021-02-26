@@ -16,7 +16,7 @@ def install(is_link, direcotry, message):
         
         exists = False
         if os.path.exists(dst):
-            real = os.path.realpath(src)
+            real = os.path.realpath(dst)
             if real == str(src):
                 continue
             else:
