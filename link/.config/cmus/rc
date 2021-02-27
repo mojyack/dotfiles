@@ -1,0 +1,3 @@
+bind -f common K win-page-up
+bind -f common J win-page-down
+

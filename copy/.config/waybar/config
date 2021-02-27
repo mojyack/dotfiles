@@ -2,7 +2,7 @@
     "layer": "top", // Waybar at top layer
     "height": 19,
     "modules-left": ["sway/workspaces"],
-    "modules-right": ["tray", "cpu", "memory", "backlight", "network", "pulseaudio", "battery#bat0", "battery#bat1", "mpd", "clock"],
+    "modules-right": ["tray", "cpu", "memory", "backlight", "network", "pulseaudio", "battery#bat0", "battery#bat1", "clock"],
     "tray": {
         // "icon-size": 21,
         "spacing": 5
@@ -70,26 +70,5 @@
             "default": ["", ""]
         },
         "on-click": "pavucontrol"
-    },
-    "mpd": {
-    	"format": "{stateIcon}",
-    	"format-disconnected": "?",
-    	"format-stopped": " ",
-    	"interval": 10,
-    	"consume-icons": {
-    		"on": " " // Icon shows only when "consume" is on
-    	},
-    	"repeat-icons": {
-    		"on": " "
-    	},
-    	"single-icons": {
-    		"on": "1"
-    	},
-    	"state-icons": {
-    		"paused": "",
-    		"playing": ""
-    	},
-    	"tooltip-format": "{consumeIcon}{repeatIcon}{singleIcon}{artist} - {album} - {title} ({elapsedTime:%M:%S}/{totalTime:%M:%S})",
-    	"tooltip-format-disconnected": "disconnected"
     }
 }
