@@ -4,7 +4,7 @@ convert() {
     ext="${1##*.}"
     if [ ! "$ext" = "wav" ]; then
         echo "not a wav file."
-        return 1;
+        exit 1
     fi
 
     name="${1%.*}"
