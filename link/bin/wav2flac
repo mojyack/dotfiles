@@ -4,7 +4,7 @@ convert() {
     ext="${1##*.}"
     if [ ! "$ext" = "wav" ]; then
         echo "not a wav file."
-        exit 1
+        return 1
     fi
 
     name="${1%.*}"
@@ -27,7 +27,7 @@ in_directory() {
 
 if !(type "sox" > /dev/null 2>&1); then
     echo "sox not found."
-    return 1;
+    exit 1
 fi
 
 if [ -f "$1" ]; then

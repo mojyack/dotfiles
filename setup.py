@@ -3,9 +3,10 @@ import shutil
 from pathlib import Path
 
 HOME = os.getenv("HOME")
+PWD = os.path.dirname(__file__)
 
 def install(is_link, direcotry, message):
-    DATA_PATH = os.path.dirname(__file__) + "/" + direcotry
+    DATA_PATH = PWD + "/" + direcotry
     DATAS = list(Path(DATA_PATH).rglob("*"))
     for src in DATAS:
         if(os.path.isdir(src)):
@@ -47,3 +48,5 @@ def install(is_link, direcotry, message):
 
 install(True, "link", "link ")
 install(False, "copy", "copy ")
+
+os.system(PWD + "/post-setup.sh")

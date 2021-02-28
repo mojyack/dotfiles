@@ -1,10 +1,34 @@
-#/usr/bin/bash
+#!/usr/bin/bash
 
-if [ ! -e "$1" ]; then
-    echo "no such file."
-    return 1
+convert() {
+    ext="${1##*.}"
+    if [ ! "$ext" = "txt" ]; then
+        echo "not a text file."
+        return 1
+    fi
+
+    name="${1%.*}"
+    mv "$name".txt "$name".txt.old
+    iconv -f SHIFT_JIS -t UTF-8 "$name".txt.old > "$name".txt
+}
+
+in_directory() {
+    for i in "$1"/*.txt; do
+        if [ -f "$i" ]; then
+            convert "$i"
+        fi
+    done
+}
+
+if !(type "iconv" > /dev/null 2>&1); then
+    echo "iconv not found."
+    exit 1
 fi
 
-tmp="$1".old
-mv "$1" "$tmp"
-iconv -f SHIFT_JIS -t UTF-8 "$tmp" > "$1"
+if [ -f "$1" ]; then
+    convert "$1"
+elif [ -d "$1" ]; then
+    in_directory "$1"
+else
+    echo "no such file."
+fi
