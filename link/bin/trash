@@ -1,0 +1,117 @@
+#!/usr/bin/zsh
+
+if [[ -z $1 ]]; then
+    echo no arguments passed.
+    exit 1
+fi
+
+get_last_line() {
+    line=$(tail -n 1 "$HIST" 2> /dev/null)
+    if [[ $? != 0 ]]; then
+        return 1
+    fi
+    echo "$line"
+    return 0
+}
+erase_last_line() {
+    sed -i '$ d' "$HIST"
+}
+in_different_partition() {
+    a=$(stat -c "%d" "$1")
+    b=$(stat -c "%d" "$2")
+    return $([[ $a != $b ]])
+}
+to_readable() {
+    echo $(numfmt --to=iec-i --suffix=B --format="%.3f" $1)
+}
+calc_directory_size() {
+    size=($(du -s "$1"))
+    echo $size[1] 
+}
+
+if [[ -z $XDG_DATA_HOME ]]; then
+    TRASH_DIR="~/.local/share/trash"
+else
+    TRASH_DIR="$XDG_DATA_HOME/trash"
+fi
+HIST="$TRASH_DIR/history"
+RANDOM_LEN=8
+MOVE_THRESHOLD=268435456 # 256MiB
+MOVE_THRESHOLD=1
+
+case "$1" in
+    "-c" )
+        # empty trash.
+        if [[ -d $TRASH_DIR ]]; then
+            rm -rf "$TRASH_DIR"
+        fi
+        exit 0;;
+    "-r" )
+        # undo last delete.
+        line=$(get_last_line)
+        if [[ $? != 0 ]]; then
+            echo "no files found in the trash." 1>&2
+            exit 1
+        fi
+        random=${line:0:$RANDOM_LEN}
+        dst=${line:$RANDOM_LEN+1}
+        
+        if mv "$TRASH_DIR/$random" "$dst"; then
+            erase_last_line
+        fi
+        exit 0
+esac
+
+if [[ ! -d $TRASH_DIR ]]; then
+    mkdir -p $TRASH_DIR
+    echo "created ${TRASH_DIR}."
+fi
+
+# move to trash.
+while [[ ! -z $1 ]]; do
+    if [[ -L $1 ]]; then
+        echo "$1 is symlink. skipping..."
+        shift 1
+        continue
+    fi
+    if [[ ! -e $1 ]]; then
+        echo "$1 is not exists. skipping..."
+        shift 1
+        continue
+    fi
+    src=$(readlink -f "$1")
+    shift 1
+    
+    if in_different_partition "$src" "$TRASH_DIR"; then
+        size=$(calc_directory_size "$src")
+        if (( $size >= $MOVE_THRESHOLD )); then
+            echo "$src is large item($(to_readable $size)). "
+            skip=false
+            while true; do
+                read -k "input?select (C)ontinue/(s)kip/(d)elete:"
+                echo
+                case "$input" in
+                    [Cc] | $'\n')
+                        break;;
+                    [Ss])
+                        skip=true
+                        break;;
+                    [Dd])
+                        rm -rf "$src"
+                        skip=true
+                        break;;
+                esac
+            done
+            if $skip; then
+                continue
+            fi
+        fi
+    fi
+    random=$(tr -dc 0-9 < /dev/urandom | head -c $RANDOM_LEN)
+    dst="$TRASH_DIR/$random"
+    
+    if mv "$src" "$dst"; then
+        echo "$random" "$src" >> "$HIST"
+    fi
+done
+exit 0
