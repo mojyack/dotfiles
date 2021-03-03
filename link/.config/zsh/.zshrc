@@ -1,4 +1,4 @@
-HISTFILE="$XDG_DATA_HOME"/histfile
+HISTFILE="$XDG_DATA_HOME"/zsh/histfile
 HISTSIZE=1000
 SAVEHIST=1000
 WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
@@ -42,6 +42,8 @@ alias q='exit'
 alias restart='sudo systemctl kexec'
 alias rmv='trash'
 alias srmv='sudo trash'
+alias _rm='rm'
+alias rm='echo use trash or _rm'
 
 # binds
 bindkey -d
