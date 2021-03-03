@@ -53,12 +53,18 @@ case "$1" in
             echo "no files found in the trash." 1>&2
             exit 1
         fi
-        random=${line:0:$RANDOM_LEN}
-        dst=${line:$RANDOM_LEN+1}
-        
-        if mv "$TRASH_DIR/$random" "$dst"; then
-            erase_last_line
-        fi
+        while [[ ! -z $line ]]; do
+            random=${line:0:$RANDOM_LEN}
+            dst=${line:$RANDOM_LEN+1}
+            
+            if mv "$TRASH_DIR/$random" "$dst"; then
+                erase_last_line
+                line=$(get_last_line)
+            else
+                break
+            fi
+        done
+        erase_last_line
         exit 0
 esac
 
@@ -68,6 +74,7 @@ if [[ ! -d $TRASH_DIR ]]; then
 fi
 
 # move to trash.
+newline=true
 while [[ ! -z $1 ]]; do
     if [[ -L $1 ]]; then
         echo "$1 is symlink. skipping..."
@@ -111,6 +118,10 @@ while [[ ! -z $1 ]]; do
     dst="$TRASH_DIR/$random"
     
     if mv "$src" "$dst"; then
+        if $newline; then
+            echo "" >> "$HIST"
+            newline=false
+        fi
         echo "$random" "$src" >> "$HIST"
     fi
 done

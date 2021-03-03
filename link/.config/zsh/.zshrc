@@ -40,10 +40,9 @@ alias um='udisksctl unmount -b'
 alias q='exit'
 # alias hc='history -c'
 alias restart='sudo systemctl kexec'
-alias rmv='trash'
-alias srmv='sudo trash'
-alias _rm='rm'
-alias rm='echo use trash or _rm'
+alias D='trash'
+alias sD='sudo trash'
+alias rm='echo -E "use trash or \\rm."; false'
 
 # binds
 bindkey -d
