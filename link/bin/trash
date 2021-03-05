@@ -25,7 +25,7 @@ to_readable() {
     echo $(numfmt --to=iec-i --suffix=B --format="%.3f" $1)
 }
 calc_directory_size() {
-    size=($(du -s "$1"))
+    size=($(du -B 1 -s "$1"))
     echo $size[1] 
 }
 
@@ -37,7 +37,6 @@ fi
 HIST="$TRASH_DIR/history"
 RANDOM_LEN=8
 MOVE_THRESHOLD=268435456 # 256MiB
-MOVE_THRESHOLD=1
 
 case "$1" in
     "-c" )

@@ -16,6 +16,6 @@ fi
 
 for dir in $1/*; do
     if [ -d "${dir}" ]; then
-        ./rename.sh -u "$(basename "${dir}")".sh "${dir}"
+        bulkrename -u "$(basename "${dir}")".sh "${dir}"
     fi
 done
