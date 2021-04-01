@@ -1,6 +1,8 @@
 typeset -U path
 path=(~/bin $path[@])
 
+export EDITOR=nvim
+
 # ccache
 export CCACHE_CONFIGPATH="$XDG_CONFIG_HOME"/ccache.config
 export CCACHE_DIR="$XDG_CACHE_HOME"/ccache
