@@ -14,6 +14,7 @@ setopt hist_reduce_blanks
 unsetopt beep
 
 zstyle ':completion:*:default' menu select=1
+zstyle ':completion:*:cd:*' ignore-parents parent pwd
 
 autoload -U compinit && compinit
 autoload -U colors && colors
@@ -55,6 +56,8 @@ bindkey -M viins '^?' backward-delete-char
 bindkey -M viins '^R' history-incremental-search-backward
 bindkey -M viins '^S' history-incremental-search-forward
 bindkey -M viins "jk" vi-cmd-mode
+bindkey -M vicmd "\e[3~" delete-char 
+bindkey -M viins "\e[3~" delete-char 
 bindkey -v
 
 # change cursor shape for different vi modes.
