@@ -45,6 +45,7 @@ alias 7zc='(){7z a "$1.7z" "$1/*" -mx=9 -r}'
 alias D='trash'
 alias sD='sudo trash'
 alias rm='echo -E "use trash or \\rm."; false'
+alias run='(){$@ > /dev/null 2>&1 &!}'
 
 # binds
 bindkey -d
