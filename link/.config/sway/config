@@ -162,7 +162,7 @@ bindsym Shift+Print           exec grim -g "$(slurp)" ~/pictures/screenshot.png
 
 set $locker 'swaylock -f -c 202020'
 bindsym $mod+o exec $locker
-exec swayidle -w before-sleep $locker
+#exec swayidle -w before-sleep $locker
 
 exec toggle_backlight reset
 exec --no-startup-id fcitx5 -d --verbose *=1
