@@ -17,10 +17,10 @@ in_directory() {
         echo "backup directory exists."
         return 1
     fi
-    mkdir $backup
+    mkdir "$backup"
     for i in "$1"/*.wav; do
         if [ -f "$i" ]; then
-            (convert "$i"; mv "$i" $backup) &
+            (convert "$i"; mv "$i" "$backup") &
         fi
     done
 }

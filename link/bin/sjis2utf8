@@ -9,7 +9,7 @@ convert() {
 
     name="${1%.*}"
     mv "$name".txt "$name".txt.old
-    iconv -f SHIFT_JIS -t UTF-8 "$name".txt.old > "$name".txt
+    iconv -c -f SHIFT_JIS -t UTF-8 "$name".txt.old > "$name".txt
 }
 
 in_directory() {

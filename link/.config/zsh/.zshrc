@@ -16,7 +16,7 @@ unsetopt beep
 zstyle ':completion:*:default' menu select=1
 zstyle ':completion:*:cd:*' ignore-parents parent pwd
 
-autoload -U compinit && compinit
+autoload -U compinit && compinit -d "$XDG_CACHE_HOME"/zsh/zcompdump
 autoload -U colors && colors
 
 # prompt

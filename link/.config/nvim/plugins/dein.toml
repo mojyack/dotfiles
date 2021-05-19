@@ -35,3 +35,10 @@ repo = 'cohama/lexima.vim'
 hook_add = """
 source ~/.config/nvim/plugins/lexima.rc.vim
 """
+
+[[plugins]]
+repo = 'rust-lang/rust.vim'
+on_ft = 'rust'
+hook_add = """
+source ~/.config/nvim/plugins/rust.rc.vim
+"""

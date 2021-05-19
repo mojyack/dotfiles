@@ -12,3 +12,8 @@ export GNUPGHOME="$XDG_DATA_HOME"/gnupg
 
 # less
 export LESSHISTFILE=-
+
+# rust
+export RUST_HOME="$XDG_DATA_HOME"/rust
+export RUSTUP_HOME="${RUST_HOME}"/rustup
+export CARGO_HOME"=${RUST_HOME}"/cargo
