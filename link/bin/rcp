@@ -1,0 +1,6 @@
+if (( $# < 2 )); then
+    echo 'too few arguments.'
+    exit 1
+fi
+
+rsync -a -P "${@:1}"
