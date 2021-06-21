@@ -1,0 +1,35 @@
+#!/usr/bin/python
+
+import sys
+import multiprocessing
+import threading
+import subprocess
+
+if len(sys.argv) < 3:
+    print("Usage: xrun SCRIPT ARGS..")
+    exit(1)
+
+script = sys.argv[1]
+args = sys.argv[2:]
+args_index = [threading.Lock(), 0]
+
+def run():
+    global args_index
+    while True:
+        args_index[0].acquire()
+        if args_index[1] == len(args):
+            args_index[0].release()
+            break
+        index = args_index[1]
+        args_index[1] += 1
+        args_index[0].release()
+
+        arg = args[index]
+        print("[{} / {}] {}".format(index + 1, len(args), arg))
+
+        result = subprocess.run([script + " $0", arg], shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, executable="/usr/bin/zsh")
+        if result.returncode != 0:
+            print("[Error] Job {} returned {}: ".format(index + 1, result.returncode), result.stdout.decode('utf-8'))
+
+for a in range(multiprocessing.cpu_count()):
+    threading.Thread(target=run).start()
