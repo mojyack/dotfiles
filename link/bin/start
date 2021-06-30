@@ -5,6 +5,7 @@ export XDG_CURRENT_DESKTOP=sway
 
 export QT_QPA_PLATFORM=wayland-egl
 export QT_QPA_PLATFORMTHEME="qt5ct"
+export LIBSEAT_BACKEND=logind
 
 export MOZ_ENABLE_WAYLAND=1
 export XDG_SESSION_TYPE=wayland
@@ -12,4 +13,4 @@ export GTK_IM_MODULE=fcitx
 export QT_IM_MODULE=fcitx
 export XMODIFIERS="@im=fcitx"
 
-exec sway
+exec systemd-cat --identifier sway sway
