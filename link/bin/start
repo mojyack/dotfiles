@@ -1,4 +1,4 @@
-#!/usr/bin/sh
+#!/bin/sh
 LANG=ja_JP.UTF-8
 
 export XDG_CURRENT_DESKTOP=sway
