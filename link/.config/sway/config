@@ -140,6 +140,11 @@ client.focused   #4c566a #2e3440 #d8dee9 #4c566a #4c566a
 client.unfocused #2e3440 #202020 #4c566a #000000 #000000
 client.urgent    #b48ead #2e3440 #d8dee9 #a3be8c #b48ead
 
+# input
+input type:keyboard {
+    repeat_delay 170
+}
+
 # others
 xwayland disable
 font "Noto Sans CJK JP 10" "Noto Color Emoji 10"
