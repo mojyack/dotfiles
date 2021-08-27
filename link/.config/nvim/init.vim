@@ -40,4 +40,8 @@ set encoding=utf-8
 set clipboard=unnamedplus
 set nowrap
 let g:python3_host_prog = '/usr/bin/python'
+let g:loaded_python_provider = 0
+let g:loaded_ruby_provider = 0
+let g:loaded_perl_provider = 0
+let g:loaded_node_provider = 0
 runtime! plugins/dein.rc.vim

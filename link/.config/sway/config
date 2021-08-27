@@ -170,7 +170,7 @@ bindsym $mod+o exec $locker
 #exec swayidle -w before-sleep $locker
 
 exec toggle_backlight reset
-exec fcitx5 -d --verbose *=1
+#exec fcitx5 -d --verbose *=1
 exec redshift > /dev/null 2>&1
 
 for_window [app_id="pavucontrol"] floating enable
