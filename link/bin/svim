@@ -1,10 +1,13 @@
-#!/bin/zsh
+#!/bin/sh
 
-if [ ! -f "$1" ]; then
-    echo "no such file."
+if [[ -z "$1" ]]; then
     exit 1
 fi
+
 temp_name="/tmp/$(basename "$1")"
-cp "$1" "$temp_name"
+if [[ -f "$1" ]]; then
+    cp "$1" "$temp_name"
+fi
+
 nvim "$temp_name"
-sudo mv -i "$temp_name" "$1"
+doas mv -i "$temp_name" "$1"

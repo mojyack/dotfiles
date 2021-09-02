@@ -1,0 +1,17 @@
+[Unit]
+
+[Service]
+Environment=LANG=ja_JP.UTF-8
+Environment=XDG_CURRENT_DESKTOP=sway
+
+Environment=QT_QPA_PLATFORM=wayland-egl
+Environment=QT_QPA_PLATFORMTHEME="qt5ct"
+Environment=LIBSEAT_BACKEND=logind
+
+Environment=MOZ_ENABLE_WAYLAND=1
+Environment=XDG_SESSION_TYPE=wayland
+Environment=GTK_IM_MODULE=fcitx
+Environment=QT_IM_MODULE=fcitx
+Environment=XMODIFIERS="@im=fcitx"
+
+ExecStart=/usr/bin/sway
