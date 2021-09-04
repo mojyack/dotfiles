@@ -1,4 +1,5 @@
 [Unit]
+Wants=dbus.service
 
 [Service]
 ExecStart=/usr/bin/fcitx5 
