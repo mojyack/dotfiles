@@ -159,8 +159,8 @@ bindsym XF86MonBrightnessUp   exec brightnessctl set +5%
 bindsym XF86MonBrightnessDown exec brightnessctl set 5%-
 bindsym Shift+XF86MonBrightnessUp   exec brightnessctl set +1%
 bindsym Shift+XF86MonBrightnessDown exec brightnessctl set 1%-
-bindsym XF86Launch1             exec toggle_backlight
-bindsym XF86Display             exec toggle_backlight
+bindsym XF86Launch1             exec ~/bin/toggle_backlight
+bindsym XF86Display             exec ~/bin/toggle_backlight
 
 bindsym Print                 exec grim -g "$(slurp)" - | wl-copy
 bindsym Shift+Print           exec grim -g "$(slurp)" ~/pictures/screenshot.png
@@ -168,10 +168,6 @@ bindsym Shift+Print           exec grim -g "$(slurp)" ~/pictures/screenshot.png
 set $locker 'swaylock -f -c 202020'
 bindsym $mod+o exec $locker
 #exec swayidle -w before-sleep $locker
-
-exec toggle_backlight reset
-#exec fcitx5 -d --verbose *=1
-exec redshift > /dev/null 2>&1
 
 for_window [app_id="pavucontrol"] floating enable
 
