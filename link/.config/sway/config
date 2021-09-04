@@ -5,7 +5,7 @@ set $down   Down
 set $left   Left
 set $right  Right
 
-set $term kitty
+set $term alacritty
 set $menu wofi
 
 # system
