@@ -3,19 +3,16 @@ FLAG_PATH="/tmp/brightness"
 
 on(){
 	swaymsg "output * dpms on"
-#    brightnessctl set $(<$FLAG_PATH)
     echo -1 > $FLAG_PATH
 }
 
 off(){
-#	brightnessctl get > $FLAG_PATH
    echo 1 > $FLAG_PATH 
    swaymsg "output * dpms off"
 }
 
-if [[ $1 = "reset" ]]; then
+if [[ ! -e $FLAG_PATH ]]; then
     echo -1 > $FLAG_PATH
-    exit 0
 fi
 
 if [[ $1 = "on" ]]; then
