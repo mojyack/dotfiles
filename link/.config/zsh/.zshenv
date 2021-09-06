@@ -17,3 +17,7 @@ export LESSHISTFILE=-
 export RUST_HOME="$XDG_DATA_HOME"/rust
 export RUSTUP_HOME="${RUST_HOME}"/rustup
 export CARGO_HOME"=${RUST_HOME}"/cargo
+
+if [[ -f $ZDOTDIR/specialenv ]] {
+    . "$ZDOTDIR/specialenv"
+}

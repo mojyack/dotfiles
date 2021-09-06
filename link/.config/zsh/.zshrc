@@ -81,3 +81,7 @@ fix_cursor() {
    echo -ne '\e[5 q'
 }
 precmd_functions+=(fix_cursor)
+
+if [[ -f $ZDOTDIR/specialrc ]] {
+    . "$ZDOTDIR/specialrc"
+}
