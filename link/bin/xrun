@@ -39,7 +39,7 @@ def run():
         arg = args[index]
         print("[{} / {}] {}".format(index + 1, len(args), arg))
 
-        result = subprocess.run([script + " $0", arg], shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, executable="/usr/bin/zsh")
+        result = subprocess.run([script + " $0", arg], shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, executable="/bin/zsh")
         if result.returncode != 0:
             print("[Error] Job {} returned {}: ".format(index + 1, result.returncode), result.stdout.decode('utf-8'))
 
