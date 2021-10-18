@@ -4,7 +4,7 @@ if [[ ! "$#" -eq 0 ]]; then
     type tmux >/dev/null 2>&1
     exit 
 elif [[ -z $TMUX ]]; then
-    tmux has-session && tmux list-sessions >/dev/null
+    tmux has-session >/dev/null 2>&1 && tmux list-sessions >/dev/null 2>&1
     if [[ ! $? -eq 0 ]]; then
         tmux new -d -s $(whoami) &
     fi
