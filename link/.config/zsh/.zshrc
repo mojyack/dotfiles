@@ -62,6 +62,10 @@ bindkey -M vicmd "\e[3~" delete-char
 bindkey -M viins "\e[3~" delete-char 
 bindkey -v
 
+# disable console stop
+stty stop undef
+stty start undef
+
 # change cursor shape for different vi modes.
 function zle-keymap-select {
   if [[ ${KEYMAP} == vicmd ]] ||
