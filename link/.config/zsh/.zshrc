@@ -34,7 +34,7 @@ autoload -U colors && colors
 
 # alias
 alias ls='ls --color=auto'
-alias slp='systemctl suspend'
+alias slp='sleep 0.5 && systemctl suspend'
 alias icat='kitty +kitten icat'
 alias mu='() {udisksctl mount -b "/dev/$1"}'
 alias um='() {udisksctl unmount -b "/dev/$1"}'
