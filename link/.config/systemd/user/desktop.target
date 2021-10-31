@@ -1,6 +1,6 @@
 [Unit]
 Requires=sway.service
-Wants=pipewire.socket pipewire-pulse.socket pipewire-media-session.service fcitx5.service
+Wants=pipewire.socket pipewire-pulse.socket wireplumber.service fcitx5.service
 
 [Install]
 WantedBy=default.target
