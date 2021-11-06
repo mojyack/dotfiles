@@ -1,2 +1,2 @@
 #!/bin/sh
-/usr/bin/firefox -P shadow
+exec firefox -P shadow
