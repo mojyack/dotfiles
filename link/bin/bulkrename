@@ -11,16 +11,27 @@ def main():
     files = [f for f in os.listdir(path) if os.path.isfile(os.path.join(path, f))]
     files.sort()
 
-    path_bak = os.path.join(path, '..', os.path.basename(path) + ".old")
+    base = os.path.basename(path)
+    path_new = os.path.abspath(os.path.join(path, '..', base + ".new"))
+    path_bak = os.path.abspath(os.path.join(path, '..', base + ".old"))
+    os.mkdir(path_new)
     os.mkdir(path_bak)
 
     i = 1
     for f in files:
         s = os.path.join(path, f)
         b = os.path.join(path_bak, f)
-        d = os.path.join(path, f"{i:03d}" + os.path.splitext(f)[1])
+        d = os.path.join(path_new, f"{i:03d}" + os.path.splitext(f)[1])
         os.link(s, b)
         os.rename(s,d)
         i += 1
+
+    try:
+        os.rmdir(path)
+    except OSError:
+        print("failed to remove original directory")
+        exit(1)
+
+    os.rename(path_new, path)
 
 main()
