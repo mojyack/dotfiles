@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/zsh
 
 if [[ ! "$#" -eq 0 ]]; then
     type tmux >/dev/null 2>&1
