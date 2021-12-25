@@ -45,3 +45,6 @@ let g:loaded_ruby_provider = 0
 let g:loaded_perl_provider = 0
 let g:loaded_node_provider = 0
 runtime! plugins/dein.rc.vim
+
+" python version
+let g:python3_host_prog = "/usr/bin/python3.9"
