@@ -44,6 +44,7 @@ alias D='trash'
 alias sD='doas trash'
 alias rm='echo -E "use trash or \\rm."; false'
 alias run='(){$@ > /dev/null 2>&1 &!}'
+alias dosa='doas'
 alias start='systemctl --user start desktop.target'
 
 # binds
