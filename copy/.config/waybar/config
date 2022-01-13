@@ -2,11 +2,7 @@
     "layer": "top", // Waybar at top layer
     "height": 19,
     "modules-left": ["sway/workspaces"],
-    "modules-right": ["tray", "cpu", "memory", "backlight", "network", "pulseaudio", "battery#bat0", "battery#bat1", "clock"],
-    "tray": {
-        // "icon-size": 21,
-        "spacing": 5
-    },
+    "modules-right": ["cpu", "memory", "backlight", "network", "pulseaudio", "battery#bat0", "battery#bat1", "clock"],
     "clock": {
         "tooltip-format": "{:%Y-%m-%d | %H:%M}",
         "format-alt": "{:%Y-%m-%d}",
