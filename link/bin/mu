@@ -1,0 +1,11 @@
+#!/bin/zsh
+
+if [[ $# != 1 ]] {
+    lsblk
+    exit 0
+}
+
+device="/dev/$1"
+userdir="/run/media/$USER"
+uuid=$(lsblk -fno UUID "$device")
+systemd-mount --fsck=no "$device" "$userdir/$uuid"
