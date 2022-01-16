@@ -7,5 +7,18 @@ if [[ $# != 1 ]] {
 
 device="/dev/$1"
 userdir="/run/media/$USER"
-uuid=$(lsblk -fno UUID "$device")
-systemd-mount --fsck=no "$device" "$userdir/$uuid"
+if ! uuid=$(lsblk -fndo UUID "$device" 2>/dev/null) || ! fstype=$(lsblk -fndo FSTYPE "$device" 2>/dev/null) {
+    echo "no such device"
+    exit 1
+}
+if [[ -z $uuid ]] || [[ -z $fstype ]] {
+    echo "invalid device"
+    exit 1
+}
+
+args=("$device" "$userdir/$uuid")
+if [[ $fstype == "vfat" ]] {
+    args=("--owner=$USER" $args)
+}
+
+systemd-mount --fsck=no "$args[@]"
