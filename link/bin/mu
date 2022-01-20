@@ -21,4 +21,4 @@ if [[ $fstype == "vfat" ]] {
     args=("--owner=$USER" $args)
 }
 
-systemd-mount --fsck=no "$args[@]"
+doas systemd-mount --fsck=no "$args[@]"
