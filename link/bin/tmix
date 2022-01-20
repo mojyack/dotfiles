@@ -7,6 +7,9 @@ elif [[ -z $TMUX ]]; then
     tmux has-session >/dev/null 2>&1 && tmux list-sessions >/dev/null 2>&1
     if [[ ! $? -eq 0 ]]; then
         tmux new -d -s $(whoami) > /dev/null 2>&1 &!
+
+        # wait for server launching
+        sleep 0.3
     fi
     exec tmux a -t $(whoami)
 fi
