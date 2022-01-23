@@ -12,5 +12,6 @@ Environment=XDG_SESSION_TYPE=wayland
 Environment=GTK_IM_MODULE=fcitx
 Environment=QT_IM_MODULE=fcitx
 Environment=XMODIFIERS="@im=fcitx"
+#Environment=WLR_RENDERER=vulkan
 
 ExecStart=/usr/bin/sway
