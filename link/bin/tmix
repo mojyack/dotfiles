@@ -1,15 +1,13 @@
 #!/bin/zsh
 
-if [[ ! "$#" -eq 0 ]]; then
+if [[ ! "$#" -eq 0 ]] {
     type tmux >/dev/null 2>&1
     exit 
-elif [[ -z $TMUX ]]; then
+} elif [[ -z $TMUX ]] {
     tmux has-session >/dev/null 2>&1 && tmux list-sessions >/dev/null 2>&1
-    if [[ ! $? -eq 0 ]]; then
-        tmux new -d -s $(whoami) > /dev/null 2>&1 &!
-
-        # wait for server launching
-        sleep 0.3
-    fi
-    exec tmux a -t $(whoami)
-fi
+    if [[ ! $? -eq 0 ]] {
+        exec tmux new -s $(whoami)
+    } else {
+        exec tmux a -t $(whoami)
+    }
+}
