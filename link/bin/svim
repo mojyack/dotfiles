@@ -13,14 +13,14 @@ fi
 temp_name="/tmp/$(basename "$1")"
 if [[ -f $1 ]]; then
     doas cp "$1" "$temp_name"
-    doas chmod o+w "$temp_name"
+    doas chown $(whoami):$(id -gn) "$temp_name"
 fi
 
 nvim "$temp_name"
 if [[ ! -e $temp_name ]]; then
     exit 0
 fi
-doas mv -i "$temp_name" "$1"
+doas cp --no-preserve=mode,ownership "$temp_name" "$1"
 if [[ -e $temp_name ]]; then
     rm $temp_name
 fi
