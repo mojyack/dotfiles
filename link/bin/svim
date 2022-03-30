@@ -13,6 +13,7 @@ fi
 temp_name="/tmp/$(basename "$1")"
 if [[ -f $1 ]]; then
     doas cp "$1" "$temp_name"
+    doas chmod o+w "$temp_name"
 fi
 
 nvim "$temp_name"
