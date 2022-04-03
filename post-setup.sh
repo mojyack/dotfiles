@@ -10,6 +10,8 @@ link() {
     echo "please remove it and try again."
 }
 
-link .zshenv "$HOME/.config/zsh/zshenv"
-link .zshrc "$HOME/.config/zsh/zshrc"
-link .zprofile "$HOME/.config/zsh/zprofile"
+link .zshenv "$XDG_CONFIG_HOME/zsh/zshenv"
+link .zshrc "$XDG_CONFIG_HOME/zsh/zshrc"
+link .zprofile "$XDG_CONFIG_HOME/zsh/zprofile"
+
+mkdir "$XDG_DATA_HOME/zsh"
