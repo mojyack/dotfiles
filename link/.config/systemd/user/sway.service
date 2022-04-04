@@ -14,4 +14,7 @@ Environment=QT_IM_MODULE=fcitx
 Environment=XMODIFIERS="@im=fcitx"
 #Environment=WLR_RENDERER=vulkan
 
+# ignore /dev/dri/card1, since this is a simple-drm device
+Environment=WLR_DRM_DEVICES=/dev/dri/card0
+
 ExecStart=/usr/bin/sway
