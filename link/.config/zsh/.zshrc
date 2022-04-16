@@ -1,4 +1,4 @@
-HISTFILE="$XDG_DATA_HOME"/zsh/histfile
+HISTFILE="$XDG_DATA_HOME/zsh/histfile"
 HISTSIZE=1000
 SAVEHIST=1000
 WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
@@ -16,7 +16,7 @@ unsetopt beep
 zstyle ':completion:*:default' menu select=1
 zstyle ':completion:*:cd:*' ignore-parents parent pwd
 
-autoload -U compinit && compinit -d "$XDG_CACHE_HOME"/zsh/zcompdump
+autoload -U compinit && compinit -d "$XDG_CACHE_HOME/zsh/zcompdump"
 autoload -U colors && colors
 
 # prompt
@@ -35,13 +35,11 @@ autoload -U colors && colors
 # alias
 alias ls='ls --color=auto'
 alias slp='sleep 0.5 && doas systemctl suspend'
-alias icat='kitty +kitten icat'
 alias um='() {doas systemd-mount -u "/dev/$1"}'
 alias q='exit'
 alias restart='doas kexec -l /boot/EFI/Linux/vmlinuz && doas systemctl kexec'
 alias D='trash'
 alias sD='doas trash'
-alias rm='echo -E "use trash or \\rm."; false'
 alias run='(){$@ > /dev/null 2>&1 &!}'
 alias dosa='doas'
 alias em='emerge'
