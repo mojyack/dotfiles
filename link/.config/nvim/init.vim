@@ -47,4 +47,4 @@ let g:loaded_node_provider = 0
 runtime! plugins/dein.rc.vim
 
 " python version
-let g:python3_host_prog = "/usr/bin/python3.9"
+let g:python3_host_prog = "/usr/bin/python3.10"
