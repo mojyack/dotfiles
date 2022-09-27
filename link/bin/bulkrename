@@ -2,12 +2,7 @@
 import sys
 import os
 
-def main():
-    if len(sys.argv) < 2:
-        print("Too few arguments")
-        return
-
-    path = os.path.abspath(sys.argv[1])
+def bulkrename(path):
     files = [f for f in os.listdir(path) if os.path.isfile(os.path.join(path, f))]
     files.sort()
 
@@ -33,5 +28,10 @@ def main():
         exit(1)
 
     os.rename(path_new, path)
+
+def main():
+    for a in sys.argv[1:]:
+        path = os.path.abspath(a)
+        bulkrename(path)
 
 main()
