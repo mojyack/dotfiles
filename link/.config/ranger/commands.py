@@ -27,3 +27,30 @@ class togetherize(Command):
         import shutil
         for f in self.fm.thisdir.marked_items:
             shutil.move(f.realpath, dirname)
+
+class rcp(Command):
+    """:rcp
+
+    Paste the selected items into the current directory using rcp/rmv
+    """
+
+    term = "alacritty"
+
+    def execute(self):
+        if len(self.fm.copy_buffer) == 0:
+            return
+
+        command = [self.term, "-e", "rmv" if self.fm.do_cut else "rcp"]
+        for file in self.fm.copy_buffer:
+            command.append(file.path)
+
+        if self.arg(1):
+            command.append(self.arg(1))
+        else:
+            command.append(self.fm.thisdir.path)
+
+        import subprocess
+        subprocess.Popen(command)
+
+        self.fm.copy_buffer = set()
+        self.do_cut = False
