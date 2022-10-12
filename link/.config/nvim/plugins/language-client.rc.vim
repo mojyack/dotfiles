@@ -3,7 +3,7 @@ let g:LanguageClient_autoStart = 1
 let g:LanguageClient_serverCommands = {
         \ 'c': ['clangd', '--compile-commands-dir=debug', '--header-insertion=never'],
         \ 'cpp': ['clangd', '--compile-commands-dir=debug', '--header-insertion=never'],
-        \ 'rust': ['rustup', 'run', 'stable', 'rls'],
+        \ 'rust': ['rust-analyzer'],
 \}
 
 function SetLSPShortcuts_cpp()
