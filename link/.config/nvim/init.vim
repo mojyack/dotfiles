@@ -31,7 +31,7 @@ let g:netrw_banner = 0
 let g:netrw_liststyle = 1
 
 " clang-format
-autocmd FileType c,cpp,objc map <buffer><Leader>f<Plug>(operator-clang-format)
+autocmd FileType c,cpp,objc map <buffer><Leader>f <Plug>(operator-clang-format)
 
 " neovim-qt
 let g:guifont = 'Cascadia Code:h11'
