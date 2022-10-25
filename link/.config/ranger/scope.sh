@@ -32,7 +32,7 @@ function handle_mime() {
             text="$(cat "$FILE_PATH")";;
 
         image/*)
-            text="$(identify "$FILE_PATH")";;
+            text="$(identify -format "%m %wx%h %[bit-depth]-bit %[colorspace]" "$FILE_PATH")";;
 
         video/* | audio/*)
             text="$(ffprobe -hide_banner "$FILE_PATH")";;
