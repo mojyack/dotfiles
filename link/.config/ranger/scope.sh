@@ -27,6 +27,7 @@ function handle_extension() {
 
 function handle_mime() {
     mime="$(file --dereference --brief --mime-type -- "${FILE_PATH}")"
+    text=''
     case "$mime" in
         text/* | */xml)
             text="$(cat "$FILE_PATH")";;
@@ -36,13 +37,12 @@ function handle_mime() {
 
         video/* | audio/*)
             text="$(ffprobe -hide_banner "$FILE_PATH")";;
-
-        application/x-executable | application/x-pie-executable | application/x-sharedlib)
-            text="$(readelf -WCa "${FILE_PATH}")";;
         
     esac
-    echo "${text}" | tfold "$WIDTH" && exit 4
-    exit 1
+
+    if [[ ! -z $text ]] {
+        echo "${text}" | tfold "$WIDTH" && exit 4
+    }
 }
 
 handle_fallback() {
