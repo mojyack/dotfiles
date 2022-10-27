@@ -8,7 +8,7 @@ EXTENSION="$FILE_PATH:t:e"
 function handle_extension() {
     case "$EXTENSION" in 
         a|ace|alz|arc|arj|bz|bz2|cab|cpio|deb|gz|jar|lha|lz|lzh|lzma|lzo|rpm|rz|t7z|tar|tbz|tbz2|tgz|tlz|txz|tZ|tzo|war|xpi|xz|Z|zip)
-            bsdtar --list --file "${FILE_PATH}" && exit 5
+            timeout 1 bsdtar --list --file "${FILE_PATH}" && exit 5
             exit 1;;
         rar)
             unrar lt -p- -- "${FILE_PATH}" && exit 5
