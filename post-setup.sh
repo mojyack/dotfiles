@@ -14,4 +14,4 @@ link .zshenv "$XDG_CONFIG_HOME/zsh/zshenv"
 link .zshrc "$XDG_CONFIG_HOME/zsh/zshrc"
 link .zprofile "$XDG_CONFIG_HOME/zsh/zprofile"
 
-mkdir "$XDG_DATA_HOME/zsh"
+mkdir -p "$XDG_DATA_HOME/zsh"
