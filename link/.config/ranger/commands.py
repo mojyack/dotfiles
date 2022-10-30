@@ -7,13 +7,14 @@ class togetherize(Command):
     """
 
     def execute(self):
-        if not self.arg(1):
-            self.fm.notify(":togetherize needs a dirname.", bad=True)
-            return
-        
         import os
         from os import path
-        dirname = path.join(self.fm.thisdir.path, path.expanduser(self.rest(1)))
+        cwd = self.fm.thisdir.path
+        if self.arg(1):
+            dirname = path.join(cwd, path.expanduser(self.rest(1)))
+        else:
+            dirname = path.join(cwd, path.basename(cwd))
+
         if not path.lexists(dirname):
             os.makedirs(dirname)
         
