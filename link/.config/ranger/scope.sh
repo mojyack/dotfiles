@@ -32,8 +32,8 @@ function handle_mime() {
         text/* | */xml)
             text="$(cat "$FILE_PATH")";;
 
-        image/*)
-            text="$(identify -format "%m %wx%h %[bit-depth]-bit %[colorspace]\n" "$FILE_PATH")";;
+        # image/*)
+        #     text="$(identify -format "%m %wx%h %[bit-depth]-bit %[colorspace]\n" "$FILE_PATH")";;
 
         video/* | audio/*)
             text="$(ffprobe -hide_banner "$FILE_PATH")";;
