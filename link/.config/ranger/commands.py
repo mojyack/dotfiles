@@ -15,8 +15,7 @@ class togetherize(Command):
         else:
             dirname = path.join(cwd, path.basename(cwd))
 
-        if not path.lexists(dirname):
-            os.makedirs(dirname)
+        os.makedirs(dirname, exist_ok=True)
         
         if not path.isdir(dirname):
             self.fm.notify("failed to create the directory", bad=True)
