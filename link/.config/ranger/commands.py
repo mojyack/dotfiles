@@ -80,5 +80,9 @@ class isolate(Command):
         os.makedirs(dest, exist_ok=True)
 
         import shutil
+        if len(self.fm.thisdir.marked_items) == 0:
+            shutil.move(self.fm.thisfile.realpath, dest)
+            return
+
         for f in self.fm.thisdir.marked_items:
             shutil.move(f.realpath, dest)
