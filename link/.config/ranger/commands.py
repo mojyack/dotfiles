@@ -55,3 +55,30 @@ class rcp(Command):
 
         self.fm.copy_buffer = set()
         self.do_cut = False
+
+class isolate(Command):
+    """:isorate <level>
+
+    Create a directory with the same name as the parent directory and move selected items into it
+    Repeat <level> times
+    """
+
+    def execute(self):
+        if not self.arg(1):
+            self.fm.notify("isolate requires <level> argument", bad=True)
+            return
+
+        level = int(self.rest(1))
+
+        import os
+
+        cwd = self.fm.thisdir.path
+        elms = cwd.split(os.sep)
+        el = len(elms)
+        child = elms[(el - level if level < el else 0):]
+        dest = os.path.join(cwd, *child)
+        os.makedirs(dest, exist_ok=True)
+
+        import shutil
+        for f in self.fm.thisdir.marked_items:
+            shutil.move(f.realpath, dest)
