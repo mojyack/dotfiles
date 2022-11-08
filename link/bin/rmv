@@ -3,7 +3,7 @@ if (( $# < 2 )); then
     exit 1
 fi
 
-rsync -a -P --remove-source-files "${@:1}"
+rsync -a -P -H --remove-source-files "${@:1}"
 len=$#
 for i in "${@:1:(( $len - 1 ))}"; do
     if [[ -d $i ]]; then
