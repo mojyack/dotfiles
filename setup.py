@@ -2,18 +2,17 @@ import os
 import shutil
 from pathlib import Path
 
-HOME = os.getenv("HOME")
-PWD = os.path.dirname(__file__)
+home = os.getenv("HOME")
+cwd = os.path.dirname(__file__)
 
 def install(is_link, direcotry, message):
-    DATA_PATH = PWD + "/" + direcotry
-    DATAS = list(Path(DATA_PATH).rglob("*"))
-    for src in DATAS:
+    data_path = os.path.join(cwd, direcotry)
+    for src in list(Path(data_path).rglob("*")):
         if(os.path.isdir(src)):
             continue
     
-        rel = os.path.relpath(src, DATA_PATH)
-        dst = HOME + "/" + rel
+        rel = os.path.relpath(src, data_path)
+        dst = os.path.join(home, rel)
         
         exists = False
         if os.path.exists(dst):
@@ -37,16 +36,15 @@ def install(is_link, direcotry, message):
                         break
         if do:
             print(message + dst)
-            parent = Path(dst).parent
-            if not os.path.exists(parent):
-                os.makedirs(parent)
+            parent = os.path.dirname(dst)
+            os.makedirs(parent, exist_ok=True)
     
             if(is_link):
-                os.symlink(src, dst)
+                os.symlink(os.path.relpath(src, os.path.dirname(dst)), dst)
             else:
                 shutil.copy(src, dst)
 
 install(True, "link", "link ")
 install(False, "copy", "copy ")
 
-os.system(PWD + "/post-setup.sh")
+os.system(os.path.join(cwd, "/post-setup.sh"))
