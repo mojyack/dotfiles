@@ -1,0 +1,34 @@
+#!/usr/bin/env python3
+
+import os
+import sys
+import shutil
+
+if len(sys.argv) < 3:
+    exit(1)
+
+for arg in sys.argv[1:-1]:
+    current = os.path.basename(arg)
+    if current[-1] != '/':
+        destdirbase = os.path.join(sys.argv[-1], current)
+    else:
+        destdirbase = sys.argv[-1]
+    print(current, destdirbase)
+    for root, subdirs, files in os.walk(arg, topdown=False):
+        destdir = os.path.join(destdirbase, os.path.relpath(root, arg))
+        print(f"* {root} {subdirs} {files}")
+        print("mkdir", destdir)
+        os.makedirs(destdir, exist_ok=True)
+        if len(files) == 0:
+            os.rmdir(root)
+            continue
+        for file in files:
+            srcfile = os.path.join(root, file)
+            destfile = os.path.join(destdir, file)
+            if os.path.exists(destfile):
+                continue
+            print(f"mv {srcfile} {destfile}")
+            shutil.move(srcfile, destfile)
+        if len(os.listdir(root)) == 0:
+            os.rmdir(root)
+        continue

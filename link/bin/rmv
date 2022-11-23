@@ -1,12 +1,46 @@
+#!/bin/zsh
+
+set -e
+
 if (( $# < 2 )); then
     echo 'too few arguments.'
     exit 1
 fi
 
-rsync -a -P -H --remove-source-files "${@:1}"
-len=$#
-for i in "${@:1:(( $len - 1 ))}"; do
-    if [[ -d $i ]]; then
-        find "$i" -empty -type d -delete
+in_different_partition() {
+    a=$(stat -c "$d" "$1")
+    b=$(stat -c "$d" "$2")
+
+    return $([[ $a != $b ]])
+}
+
+dest=${@: -1}
+move_args=()
+sync_args=()
+
+if [[ ! -e $dest ]] {
+    mkdir "$dest"
+}
+
+for dir in "${@:1:(( $len - 1 ))}"; {
+    if in_different_partition "$dir" $dest; then
+        sync_args=($sync_args $dir)
+    else
+        move_args=($move_args $dir)
     fi
-done
+}
+
+if (( ${#move_args[@]} != 0 )) {
+    recursive-move $move_args "$dest"
+}
+
+if (( ${#sync_args[@]} != 0 )) {
+    rsync -a -P -H --remove-source-files $sync_args "$dest"
+    for i in $sync_args; {
+        if [[ -d $i ]] {
+            find "$i" -empty -type d -delete
+        }
+    }
+}
+
+len=$#
