@@ -23,7 +23,12 @@ set tabstop=4
 set shiftwidth=4
 set completeopt=menuone
 set foldmethod=syntax 
+
+" color
 set termguicolors
+let g:hybrid_custom_term_colors = 1
+let g:hybrid_reduced_contrast = 1
+colorscheme hybrid
 
 " netrw
 filetype plugin indent on
