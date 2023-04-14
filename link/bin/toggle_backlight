@@ -1,4 +1,3 @@
-#!/bin/sh
 FLAG_PATH="/tmp/brightness"
 
 on(){
