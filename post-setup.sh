@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 link() {
     [[ -L "$2" && $(readlink "$2") == "$1" ]] && return
