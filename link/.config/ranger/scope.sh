@@ -1,4 +1,4 @@
-#!/bin/zsh
+#!/usr/bin/env zsh
 
 FILE_PATH="$1"
 WIDTH="$2"
