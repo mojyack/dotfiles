@@ -47,4 +47,4 @@ def install(is_link, direcotry, message):
 install(True, "link", "link ")
 install(False, "copy", "copy ")
 
-os.system(os.path.join(cwd, "/post-setup.sh"))
+os.system(os.path.join(cwd, "post-setup.sh"))
