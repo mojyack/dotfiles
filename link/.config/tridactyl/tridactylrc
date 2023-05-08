@@ -1,4 +1,4 @@
-#set smoothscroll true
+set smoothscroll true
 
 colourscheme dark
 
@@ -19,8 +19,8 @@ bind e tabnext
 bind w tabprev
 bind <C-PageDown> tabmove +1
 bind <C-PageUp> tabmove -1
-bind / fillcmdline find
 bind n findnext 1
 bind N findnext -1
 bind A fillcmdline bmarks
 bind ,<Space> clearsearchhighlight
+unbind <C-f>
