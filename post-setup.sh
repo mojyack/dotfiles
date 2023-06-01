@@ -15,3 +15,4 @@ link .zshrc "$XDG_CONFIG_HOME/zsh/zshrc"
 link .zprofile "$XDG_CONFIG_HOME/zsh/zprofile"
 
 mkdir -p "$XDG_DATA_HOME/zsh"
+mkdir -p "$XDG_CACHE_HOME/zsh"
