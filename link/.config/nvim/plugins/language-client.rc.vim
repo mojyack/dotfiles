@@ -26,8 +26,13 @@ function SetLSPShortcuts_rust()
   nnoremap <leader>lf :RustFmt<CR>
 endfunction()
 
+function SetLSPShortcuts_csharp()
+  nnoremap <leader>lf :ClangFormat<CR>
+endfunction()
+
 augroup LSP
   autocmd!
   autocmd FileType cpp,c call SetLSPShortcuts_cpp()
   autocmd FileType rust call SetLSPShortcuts_rust()
+  autocmd FileType cs call SetLSPShortcuts_csharp()
 augroup END
