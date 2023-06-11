@@ -1,0 +1,34 @@
+#!/bin/bash
+
+FLAG_PATH="/tmp/brightness"
+DISPLAY=$1
+
+on() {
+    brightnessctl -d $DISPLAY s $(< $FLAG_PATH)
+}
+
+off() {
+    brightnessctl -d $DISPLAY g > $FLAG_PATH
+    brightnessctl -d $DISPLAY s 0
+}
+
+if [[ ! -e $FLAG_PATH ]]; then
+    off
+    exit 0
+fi
+
+if [[ $2 = "on" ]]; then
+    on
+    exit 0
+fi
+
+if [[ $2 = "off" ]]; then
+    off
+    exit 0
+fi
+
+if [[ $(brightnessctl -d $DISPLAY g) == 0 ]]; then
+    on
+else
+    off
+fi

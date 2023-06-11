@@ -1,0 +1,35 @@
+#!/bin/bash
+
+FLAG_PATH="/tmp/brightness-dpms"
+DISPLAY=$1
+
+on() {
+    swaymsg "output $DISPLAY dpms on"
+    echo on > $FLAG_PATH
+}
+
+off() {
+    swaymsg "output $DISPLAY dpms off"
+    echo off > $FLAG_PATH 
+}
+
+if [[ ! -e $FLAG_PATH ]]; then
+    off
+    exit 0
+fi
+
+if [[ $2 = "on" ]]; then
+    on
+    exit 0
+fi
+
+if [[ $2 = "off" ]]; then
+    off
+    exit 0
+fi
+
+if [[ $(< $FLAG_PATH) == off ]]; then
+    on
+else
+    off
+fi
