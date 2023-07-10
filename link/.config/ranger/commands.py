@@ -50,7 +50,7 @@ class rcp(Command):
             command.append(self.fm.thisdir.path)
 
         import subprocess
-        subprocess.Popen(command)
+        subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 
         self.fm.copy_buffer = set()
         self.do_cut = False
