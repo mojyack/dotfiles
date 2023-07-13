@@ -1,2 +1,2 @@
 #!/usr/bin/env zsh
-exec /opt/firefox/firefox-bin $@
+exec /usr/lib64/firefox/firefox $@
