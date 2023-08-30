@@ -118,7 +118,7 @@ bindsym $mod+w mode "resize"
 # status bar
 bar {
     position top
-    font  "Hack"
+    font  "Hack 10"
     height 19
     status_command ~/bin/swaybar-status
     colors {
