@@ -1,4 +1,6 @@
 #!/bin/zsh
+# https://man.archlinux.org/man/sway-bar.5.en
+# https://man.archlinux.org/man/swaybar-protocol.7.en
 
 build_battery_status() {
     v=$((100 * $(cat $1/energy_now) / $(cat $1/energy_full)))
