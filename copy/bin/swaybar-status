@@ -1,0 +1,98 @@
+#!/bin/zsh
+
+build_battery_status() {
+    v=$((100 * $(cat $1/energy_now) / $(cat $1/energy_full)))
+    c=$(cat $1/status)
+    if [[ $c == "Discharging" ]]; then
+        i="-"
+    elif [[ $c == "Charging" ]]; then
+        i="+"
+    else
+        i="="
+    fi
+    echo $v$i
+}
+
+tx() {
+    echo '{ "version": 1 }'
+    # echo '{ "version": 1, "click_events": true }'
+    
+    echo '['
+    
+    while true; do
+        echo '['
+
+        echo '{'
+        echo '"full_text":' '" '$(uptime | sed -r 's/^.*load average: (([0-9]|\.)+),.*$/\1/')'",'
+        echo '"name": "cpuload",'
+        echo '},'
+
+        echo '{'
+        echo '"full_text":' '"' $(free -h | sed '/^Mem:/!d;s/  */ /g' | cut -d' ' -f3)'",'
+        echo '"name": "memory",'
+        echo '},'
+
+        D=/sys/class/backlight/intel_backlight
+        echo '{'
+        echo '"full_text":' '" '$((100 * $(cat $D/brightness) / $(cat $D/max_brightness)))'%",'
+        echo '"name": "backlight",'
+        echo '},'
+
+        i=$(ip route get 8.8.8.8 | sed -r 's/^.*dev (([0-9]|[a-z])+).*$/\1/;q')
+        if [[ -n $i ]]; then
+            t=" $i"
+        else
+            t="⚠ "
+        fi
+        echo '{'
+        echo '"full_text":' '"' "$t" '",'
+        echo '"name": "network",'
+        echo '},'
+
+        s=$(wpctl get-volume @DEFAULT_AUDIO_SINK@)
+        if [[ $s == *MUTED* ]]; then
+            t=" "
+        else
+            t=" ${$((100 * $(echo $s | cut -d ' ' -f 2)))%?}%"
+        fi
+        echo '{'
+        echo '"full_text":' '"' "$t" '",'
+        echo '"name": "volume",'
+        echo '},'
+
+        echo '{'
+        echo '"full_text":' '" '$(build_battery_status /sys/class/power_supply/BAT0)'%",'
+        echo '"name": "battery0",'
+        echo '},'
+
+        echo '{'
+        echo '"full_text":' '" '$(build_battery_status /sys/class/power_supply/BAT1)'%",'
+        echo '"name": "battery1",'
+        echo '},'
+    
+        echo '{'
+        echo '"full_text":' '"'$(date "+%Y-%m-%d %H:%M")'",'
+        echo '"name": "clock",'
+        echo '},'
+    
+        echo '],'
+        sleep 1
+    done
+    
+    echo "]"
+}
+
+tx
+# tx &
+
+# while true; do
+#     read input
+# 
+#     name=$(echo $input | sed -r 's/^.*"name"\: "(\w+)".*$/\1/;q')
+#     # button=$(echo $input | sed -r 's/^.*"button"\: ([[:digit:]]+).*$/\1/;q')
+#     if [[ $name == "clock" ]]; then
+#         killall -s 34 wvkbd
+#     fi
+# done
+
+return 0
