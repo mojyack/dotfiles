@@ -117,15 +117,15 @@ bindsym $mod+w mode "resize"
 
 # status bar
 bar {
-    swaybar_command waybar
     position top
     font  "Hack"
+    height 19
+    status_command ~/bin/swaybar-status
     colors {
         statusline #e5e9f0
         background #2e3440
-        inactive_workspace #32323200 #32323200 #5c5c5c
+        inactive_workspace #323232 #323232 #5c5c5c
     }
-    workspace_buttons no
 }
 
 # windows
@@ -168,7 +168,5 @@ bindsym Shift+Print           exec grim -g "$(slurp)" /tmp/screenshot.png
 set $locker 'swaylock -f -c 202020'
 bindsym $mod+o exec $locker
 #exec swayidle -w before-sleep $locker
-
-for_window [app_id="pavucontrol"] floating enable
 
 include special
