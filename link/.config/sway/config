@@ -97,6 +97,13 @@ bindsym $mod+Shift+n floating toggle
 bindsym $mod+n focus mode_toggle
 
 
+# screen rotation
+bindsym $mod+Ctrl+Alt+Up    output - transform 180
+bindsym $mod+Ctrl+Alt+Down  output - transform 0
+bindsym $mod+Ctrl+Alt+Left  output - transform 90
+bindsym $mod+Ctrl+Alt+Right output - transform 270
+
+
 # scratchpad
 bindsym $mod+Shift+minus move scratchpad
 bindsym $mod+minus       scratchpad show
