@@ -1,8 +1,8 @@
 set hidden
 let g:LanguageClient_autoStart = 1
 let g:LanguageClient_serverCommands = {
-        \ 'c': ['clangd', '--compile-commands-dir=debug', '--header-insertion=never'],
-        \ 'cpp': ['clangd', '--compile-commands-dir=debug', '--header-insertion=never'],
+        \ 'c': ['clangd', '--compile-commands-dir=' . getcwd() . '/debug', '--header-insertion=never'],
+        \ 'cpp': ['clangd', '--compile-commands-dir=' . getcwd() . '/debug', '--header-insertion=never'],
         \ 'rust': ['rust-analyzer'],
 \}
 
