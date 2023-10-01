@@ -1,0 +1,22 @@
+#!/usr/bin/env zsh
+
+if ! which totp-linux 2>&1 >/dev/null ; then
+    echo "totp-linux not found"
+    echo "please install from https://github.com/Zebradil/rustotpony"
+    exit 1
+fi
+
+db="$HOME/build/password/data/totp.json"
+if [[ ! -e $db ]] then
+    echo "database not found"
+    exit 1
+fi
+
+totp_home="/tmp/.rustotpony"
+trap 'rm -r "$totp_home"; exit 1' INT
+
+mkdir -p "$totp_home"
+ln -s "$db" "$totp_home/db.json"
+
+HOME="$totp_home:h" totp-linux $@
+rm -r "$totp_home"
