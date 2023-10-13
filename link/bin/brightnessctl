@@ -1,0 +1,24 @@
+#!/bin/zsh
+
+SYS="/sys/class/backlight/intel_backlight"
+
+if [[ $1 == -* || $1 == +* ]]; then
+    val=$(( $(cat $SYS/brightness) + $1 ))
+else
+    val=$1
+fi
+
+max_brightness=$(cat $SYS/max_brightness)
+if (( $val > $max_brightness )); then
+    val=$max_brightness
+elif (( $val < 0 )); then
+    val=0
+fi
+
+if [[ $(stat -c "%G" $SYS/brightness) != "wheel" ]]; then
+    doas chgrp wheel $SYS/brightness
+    doas chmod g+w $SYS/brightness
+fi
+
+echo $val > $SYS/brightness
+#echo $val / $max_brightness
