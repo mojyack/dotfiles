@@ -62,6 +62,13 @@ tx() {
         echo '"name": "volume",'
         echo '},'
 
+        temp=$(cat /sys/class/thermal/thermal_zone0/temp)
+        t=" $(($temp / 1000))°C"
+        echo '{'
+        echo '"full_text":' '"'$t'",'
+        echo '"name": "temp",'
+        echo '},'
+
         echo '{'
         echo '"full_text":' '" '$(build_battery_status /sys/class/power_supply/BAT0)'%",'
         echo '"name": "battery0",'
