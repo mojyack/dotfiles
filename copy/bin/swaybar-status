@@ -40,7 +40,7 @@ tx() {
         echo '"name": "backlight",'
         echo '},'
 
-        i=$(ip route get 8.8.8.8 | sed -r 's/^.*dev (([0-9]|[a-z])+).*$/\1/;q')
+        i=$(ip route get 8.8.8.8 2>/dev/null | sed -r 's/^.*dev (([0-9]|[a-z])+).*$/\1/;q')
         if [[ -n $i ]]; then
             t=" $i"
         else
