@@ -86,7 +86,7 @@ tx() {
         echo '},'
     
         echo '],'
-        read -t 1
+        sleep 1
     done
     
     echo "]"
