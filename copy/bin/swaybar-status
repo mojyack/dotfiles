@@ -3,16 +3,17 @@
 # https://man.archlinux.org/man/swaybar-protocol.7.en
 
 build_battery_status() {
-    v=$((100 * $(cat $1/energy_now) / $(cat $1/energy_full)))
-    c=$(cat $1/status)
-    if [[ $c == "Discharging" ]]; then
+    read now < $1/energy_now
+    read full < $1/energy_full
+    read state < $1/status
+    if [[ $state == "Discharging" ]]; then
         i="-"
-    elif [[ $c == "Charging" ]]; then
+    elif [[ $state == "Charging" ]]; then
         i="+"
     else
         i="="
     fi
-    echo $v$i
+    echo $((100 * $now / $full))$i
 }
 
 tx() {
@@ -34,9 +35,9 @@ tx() {
         echo '"name": "memory",'
         echo '},'
 
-        D=/sys/class/backlight/intel_backlight
+        read v < "/sys/class/backlight/intel_backlight/brightness"
         echo '{'
-        echo '"full_text":' '" '$((100 * $(cat $D/brightness) / $(cat $D/max_brightness)))'%",'
+        echo '"full_text":' '" '$v'",'
         echo '"name": "backlight",'
         echo '},'
 
@@ -62,7 +63,7 @@ tx() {
         echo '"name": "volume",'
         echo '},'
 
-        temp=$(cat /sys/class/thermal/thermal_zone0/temp)
+        read temp < "/sys/class/thermal/thermal_zone0/temp"
         t=" $(($temp / 1000))°C"
         echo '{'
         echo '"full_text":' '"'$t'",'
@@ -85,7 +86,7 @@ tx() {
         echo '},'
     
         echo '],'
-        sleep 1
+        read -t 1
     done
     
     echo "]"
