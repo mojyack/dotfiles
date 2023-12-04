@@ -2,6 +2,8 @@
 cat $0 | tail -n +5 | clang++ -march=native -O3 -x c++ -o $0 - && exec $0 $1
 exit 0
 
+#include <array>
+#include <cstdint>
 #include <string>
 
 auto parse(const char* const v) -> int {
@@ -32,11 +34,14 @@ auto calc_utf8_length(const uint8_t first) -> int {
     return 1;
 }
 
+constexpr auto eof = char(EOF);
+
 auto read_char() -> Char {
     const auto first = char(std::getc(stdin));
     auto       c     = Char{first, 0, 0, 0};
-    if(first == EOF) {
-        return c;
+    if(first == eof) {
+        // return c;
+        exit(0);
     }
     for(auto i = 1; i < calc_utf8_length(first); i += 1) {
         c[i] = std::getc(stdin);
@@ -52,9 +57,9 @@ auto main(const int argc, const char* const argv[]) -> int {
     auto       count = 0;
 loop:
     auto c = read_char();
-    if(c[0] == EOF) [[unlikely]] {
-        return 0;
-    }
+    // if(c[0] == eof) [[unlikely]] {
+    //     return 0;
+    // }
     if(c[0] == '\n') {
         count = 0;
         std::putc('\n', stdout);
