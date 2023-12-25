@@ -1,0 +1,173 @@
+# https://man.archlinux.org/man/sway-bar.5.en
+# https://man.archlinux.org/man/swaybar-protocol.7.en
+
+# $1 name
+print_load_average() {
+    arr=($(uptime))
+    v=$arr[-3]
+    v=${v::-1}
+
+    echo '{'
+    echo '"full_text":' "\" $v\","
+    echo '"name":'      "\"$1\","
+    echo '},'
+}
+
+# $1 name
+print_memory_usage() {
+    arr=($(free -h))
+    v=$arr[9]
+
+    echo '{'
+    echo '"full_text":' "\"  $v\","
+    echo '"name":'      "\"$1\","
+    echo '},'
+}
+
+# $1 name
+print_network_status() {
+    arr=($(ip route get 8.8.8.8 2>/dev/null))
+    v=$arr[5]
+    if [[ -n $v ]]; then
+        t=" $v"
+    else
+        t="⚠ "
+    fi
+
+    echo '{'
+    echo '"full_text":' "\"$t\","
+    echo '"name":'      "\"$1\","
+    echo '},'
+}
+
+# $1 name
+print_screen_brightness_intel() {
+    read v < "/sys/class/backlight/intel_backlight/brightness"
+
+    echo '{'
+    echo '"full_text":' "\" $v\","
+    echo '"name":'      "\"$1\","
+    echo '},'
+}
+
+# $1 name
+# $2 output name
+print_screen_brightness_gamma_daemon() {
+    read v < "/tmp/brightness/$2"
+
+    echo '{'
+    echo '"full_text":' "\" $v\","
+    echo '"name":'      "\"$1\","
+    echo '},'
+}
+
+# $1 name
+print_speeker_volume() {
+    arr=($(wpctl get-volume @DEFAULT_AUDIO_SINK@))
+    v=$arr[2]
+
+    if [[ $arr[3] == [MUTED] ]]; then
+        t=" "
+    else
+        t=" $v"
+    fi
+
+    echo '{'
+    echo '"full_text":' "\"$t\","
+    echo '"name":'      "\"$1\","
+    echo '},'
+}
+
+# $1 name
+# $2 sysfs path
+print_cputemp() {
+    read v < $2
+    t=" $(($v / 1000))°C"
+
+    echo '{'
+    echo '"full_text":' "\"$t\","
+    echo '"name":'      "\"$1\","
+    echo '},'
+}
+
+# $1 name
+# $2 battery name
+# $3 status prefix
+print_battery_status() {
+    sysfs="/sys/class/power_supply/$2"
+    read now < $sysfs/${3}_now
+    read full < $sysfs/${3}_full
+    read state < $sysfs/status
+    if [[ $state == "Discharging" ]]; then
+        i="-"
+    elif [[ $state == "Charging" ]]; then
+        i="+"
+    else
+        i="="
+    fi
+    t=" $((100 * $now / $full))$i"
+
+    echo '{'
+    echo '"full_text":' "\"$t\","
+    echo '"name":'      "\"$1\","
+    echo '},'
+}
+
+# $1 name
+print_datetime() {
+    echo '{'
+    echo '"full_text":' '"'$(date "+%Y-%m-%d %H:%M")'",'
+    echo '"name":'      "\"$1\","
+    echo '},'
+}
+
+# $1 clickable
+swaybar_main() {
+    if [[ $1 == 1 ]]; then
+        echo '{ "version": 1, "click_events": true }'
+    else
+        echo '{ "version": 1 }'
+    fi
+
+    echo '['
+    
+    while true; do
+        echo '['
+
+        print_status
+    
+        echo '],'
+        sleep 1
+    done
+    
+    echo "]"
+}
+
+# $1 need name
+# $2 need button
+click_handler_main() {
+    while true; do
+        read input
+    
+        if [[ $1 == 1 ]]; then
+            name=$(echo $input | sed -r 's/^.*"name"\: "(\w+)".*$/\1/;q')
+        else
+            name=""
+        fi
+        if [[ $2 == 1 ]]; then
+            button=$(echo $input | sed -r 's/^.*"button"\: ([[:digit:]]+).*$/\1/;q')
+        else
+            button=0
+        fi
+
+        echo $input >> /tmp/input
+        on_click $name $button
+    done
+}
+
+#### misc ####
+switch_wvkbd() {
+    if ! killall -s 35 wvkbd; then
+        wvkbd &!
+    fi
+}

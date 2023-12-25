@@ -1,108 +1,27 @@
 #!/bin/zsh
-# https://man.archlinux.org/man/sway-bar.5.en
-# https://man.archlinux.org/man/swaybar-protocol.7.en
 
-build_battery_status() {
-    read now < $1/energy_now
-    read full < $1/energy_full
-    read state < $1/status
-    if [[ $state == "Discharging" ]]; then
-        i="-"
-    elif [[ $state == "Charging" ]]; then
-        i="+"
-    else
-        i="="
+source ~/bin/swaybar-status-helper
+
+print_status() {
+    print_load_average "cpuload"
+    print_memory_usage "memory"
+    print_network_status "network"
+    print_screen_brightness_intel "backlight"
+    print_screen_brightness_gamma_daemon "backlight1" "HDMI-A-1"
+    print_speeker_volume "voluem"
+    print_cputemp "temp" "/sys/class/thermal/thermal_zone2/temp"
+    print_battery_status "battery" "BAT1" "charge"
+    print_datetime "clock"
+}
+
+on_click() {
+    if [[ $1 == "clock" ]]; then
+        switch_wvkbd
     fi
-    echo $((100 * $now / $full))$i
 }
 
-tx() {
-    echo '{ "version": 1 }'
-    # echo '{ "version": 1, "click_events": true }'
-    
-    echo '['
-    
-    while true; do
-        echo '['
+swaybar_main 1 &
 
-        echo '{'
-        echo '"full_text":' '" '$(uptime | sed -r 's/^.*load average: (([0-9]|\.)+),.*$/\1/')'",'
-        echo '"name": "cpuload",'
-        echo '},'
-
-        echo '{'
-        echo '"full_text":' '"' $(free -h | sed '/^Mem:/!d;s/  */ /g' | cut -d' ' -f3)'",'
-        echo '"name": "memory",'
-        echo '},'
-
-        read v < "/sys/class/backlight/intel_backlight/brightness"
-        echo '{'
-        echo '"full_text":' '" '$v'",'
-        echo '"name": "backlight",'
-        echo '},'
-
-        i=$(ip route get 8.8.8.8 2>/dev/null | sed -r 's/^.*dev (([0-9]|[a-z])+).*$/\1/;q')
-        if [[ -n $i ]]; then
-            t=" $i"
-        else
-            t="⚠ "
-        fi
-        echo '{'
-        echo '"full_text":' '"' "$t" '",'
-        echo '"name": "network",'
-        echo '},'
-
-        s=$(wpctl get-volume @DEFAULT_AUDIO_SINK@)
-        if [[ $s == *MUTED* ]]; then
-            t=" "
-        else
-            t=" ${$((100 * $(echo $s | cut -d ' ' -f 2)))%?}%"
-        fi
-        echo '{'
-        echo '"full_text":' '"' "$t" '",'
-        echo '"name": "volume",'
-        echo '},'
-
-        read temp < "/sys/class/thermal/thermal_zone0/temp"
-        t=" $(($temp / 1000))°C"
-        echo '{'
-        echo '"full_text":' '"'$t'",'
-        echo '"name": "temp",'
-        echo '},'
-
-        echo '{'
-        echo '"full_text":' '" '$(build_battery_status /sys/class/power_supply/BAT0)'%",'
-        echo '"name": "battery0",'
-        echo '},'
-
-        echo '{'
-        echo '"full_text":' '" '$(build_battery_status /sys/class/power_supply/BAT1)'%",'
-        echo '"name": "battery1",'
-        echo '},'
-    
-        echo '{'
-        echo '"full_text":' '"'$(date "+%Y-%m-%d %H:%M")'",'
-        echo '"name": "clock",'
-        echo '},'
-    
-        echo '],'
-        sleep 1
-    done
-    
-    echo "]"
-}
-
-tx
-# tx &
-
-# while true; do
-#     read input
-# 
-#     name=$(echo $input | sed -r 's/^.*"name"\: "(\w+)".*$/\1/;q')
-#     # button=$(echo $input | sed -r 's/^.*"button"\: ([[:digit:]]+).*$/\1/;q')
-#     if [[ $name == "clock" ]]; then
-#         killall -s 34 wvkbd
-#     fi
-# done
+click_handler_main 1 0
 
 return 0
