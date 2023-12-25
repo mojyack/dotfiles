@@ -4,12 +4,12 @@ FLAG_PATH="/tmp/brightness"
 DISPLAY=$1
 
 on() {
-    brightnessctl -d $DISPLAY s $(< $FLAG_PATH)
+    brightnessctl $(cat $FLAG_PATH)
 }
 
 off() {
-    brightnessctl -d $DISPLAY g > $FLAG_PATH
-    brightnessctl -d $DISPLAY s 0
+    brightnessctl > $FLAG_PATH
+    brightnessctl 0
 }
 
 if [[ ! -e $FLAG_PATH ]]; then
@@ -27,7 +27,7 @@ if [[ $2 = "off" ]]; then
     exit 0
 fi
 
-if [[ $(brightnessctl -d $DISPLAY g) == 0 ]]; then
+if [[ $(brightnessctl) == 0 ]]; then
     on
 else
     off
