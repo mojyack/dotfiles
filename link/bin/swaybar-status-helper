@@ -105,7 +105,7 @@ print_battery_status() {
     else
         i="="
     fi
-    t=" $((100 * $now / $full))$i"
+    t=" $((100 * $now / $full))$i%"
 
     echo '{'
     echo '"full_text":' "\"$t\","
