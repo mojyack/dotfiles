@@ -42,6 +42,7 @@ alias run='(){$@ > /dev/null 2>&1 &!}'
 alias dosa='doas'
 alias start='systemctl --user start desktop.target'
 alias sfs='~/build/simple-file-server/server.py'
+alias mksh='(){echo "#!/bin/zsh" > $1 && chmod u+x $1}'
 
 # binds
 bindkey -d
