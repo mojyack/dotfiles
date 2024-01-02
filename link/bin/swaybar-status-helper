@@ -160,7 +160,6 @@ click_handler_main() {
             button=0
         fi
 
-        echo $input >> /tmp/input
         on_click $name $button
     done
 }
