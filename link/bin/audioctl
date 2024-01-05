@@ -1,0 +1,13 @@
+#!/bin/zsh
+
+if [[ $1 == "up" ]]; then
+    exec wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ $2%+
+elif [[ $1 == "down" ]]; then
+    exec wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ $2%-
+elif [[ $1 == "set" ]]; then
+    exec wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ $2%
+elif [[ $1 == "mute" ]]; then
+    exec wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
+elif [[ $1 == "mic-mute" ]]; then
+    exec wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle
+fi
