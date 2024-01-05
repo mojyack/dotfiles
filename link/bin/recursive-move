@@ -21,7 +21,7 @@ def move(src, dst):
         else:
             shutil.move(src, dst)
         return True
-    if isfile(src) or isfile(dst) or islink(dst):
+    if isfile(src) or isfile(dst):
         print("skipped:", src)
         return False
 
