@@ -1,4 +1,5 @@
 import os
+import sys
 import shutil
 from pathlib import Path
 
@@ -46,7 +47,7 @@ def install(is_link, direcotry, message):
                 shutil.copy(src, dst)
 
 
-install(True, "link", "link ")
-install(False, "copy", "copy ")
+not "--skip-link" in sys.argv and install(True, "link", "link ")
+not "--skip-copy" in sys.argv and install(False, "copy", "copy ")
 
 os.system(os.path.join(cwd, "post-setup.sh"))
