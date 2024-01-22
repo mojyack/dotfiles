@@ -3,3 +3,4 @@ bind -f common J win-page-down
 bind -f common + vol +2%
 bind -f common _ vol -2%
 set output_plugin=pulse
+colorscheme solarized-dark
