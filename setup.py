@@ -5,15 +5,16 @@ from pathlib import Path
 home = os.getenv("HOME")
 cwd = os.path.dirname(__file__)
 
+
 def install(is_link, direcotry, message):
     data_path = os.path.join(cwd, direcotry)
     for src in list(Path(data_path).rglob("*")):
-        if(os.path.isdir(src)):
+        if os.path.isdir(src):
             continue
-    
+
         rel = os.path.relpath(src, data_path)
         dst = os.path.join(home, rel)
-        
+
         exists = False
         if os.path.exists(dst):
             real = os.path.realpath(dst)
@@ -38,11 +39,12 @@ def install(is_link, direcotry, message):
             print(message + dst)
             parent = os.path.dirname(dst)
             os.makedirs(parent, exist_ok=True)
-    
-            if(is_link):
+
+            if is_link:
                 os.symlink(os.path.relpath(src, os.path.dirname(dst)), dst)
             else:
                 shutil.copy(src, dst)
+
 
 install(True, "link", "link ")
 install(False, "copy", "copy ")
