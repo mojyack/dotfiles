@@ -9,7 +9,8 @@ print_status() {
     print_screen_brightness_intel "backlight"
     print_screen_brightness_gamma_daemon "backlight1" "HDMI-A-1"
     print_speeker_volume "volume"
-    print_cputemp "temp" "/sys/class/thermal/thermal_zone2/temp"
+    print_cputemp "temp" "/sys/class/thermal/thermal_zone0/temp"
+    print_cputemp "temp" "/sys/devices/platform/coretemp.0/hwmon/hwmon0/temp0_input"
     print_battery_status "battery" "BAT1" "charge"
     print_datetime "clock"
 }
