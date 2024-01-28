@@ -1,11 +1,9 @@
 local function config()
+    vim.g["clang_format#code_style"] = "LLVM"
     vim.g["clang_format#style_options"] = {
-        BasedOnStyle = "LLVM",
         ColumnLimit = "0", 
         BreakBeforeBraces = "Attach",
         SpaceBeforeParens = "Never", 
-        IndentWidth = "4", 
-        UseTab = "Never", 
         PointerAlignment = "Left", 
         AllowShortIfStatementsOnASingleLine = "true",
         AlignConsecutiveAssignments = "true",
