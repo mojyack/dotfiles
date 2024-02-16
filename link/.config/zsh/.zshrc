@@ -34,7 +34,8 @@ autoload -U colors && colors
 
 # alias
 alias ls='ls --color=auto'
-alias slp='sleep 0.5 && doas systemctl suspend'
+alias slp='doas /usr/local/bin/suspend'
+alias slpe='{ sleep 1; doas /usr/local/bin/suspend; }&; tmux detach'
 alias um='() {doas systemd-mount -u "/dev/$1"}'
 alias q='exit'
 alias restart='doas kexec -l /boot/EFI/Linux/vmlinuz && doas systemctl kexec'
