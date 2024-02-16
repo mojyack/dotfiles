@@ -1,5 +1,0 @@
-mode=run
-colors=colors
-filter_rate=100
-always_parse_args=true
-allow_image=true
