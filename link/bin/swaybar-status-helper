@@ -66,7 +66,7 @@ print_speeker_volume() {
     arr=($(wpctl get-volume @DEFAULT_AUDIO_SINK@))
     v=$arr[2]
 
-    if [[ $arr[3] == [MUTED] ]]; then
+    if [[ $arr[3] == '[MUTED]' ]]; then
         t=" "
     else
         t=" $v"
