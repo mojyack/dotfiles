@@ -29,6 +29,9 @@ local function on_attach(client, bufnr)
         vim.keymap.set(mode, lhs, rhs, { noremap = true, silent = true, buffer = bufnr})
     end
     keymap("n", "<leader>ld", vim.lsp.buf.declaration)
+    keymap("n", "<leader>lt", vim.lsp.buf.type_definition)
+    keymap("n", "<leader>lr", vim.lsp.buf.rename)
+    keymap("n", "<leader>la", vim.lsp.buf.code_action)
     keymap("n", "<leader>lc", "<cmd>ClangdSwitchSourceHeader<cr>")
 end
 
