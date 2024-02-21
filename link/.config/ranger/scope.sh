@@ -1,56 +1,53 @@
 #!/usr/bin/env zsh
 
-FILE_PATH="$1"
-WIDTH="$2"
-HEIGHT="$3"
-EXTENSION="$FILE_PATH:t:e"
+## Meanings of exit codes:
+## code | meaning    | action of ranger
+## -----+------------+-------------------------------------------
+## 0    | success    | Display stdout as preview
+## 1    | no preview | Display no preview at all
+## 2    | plain text | Display the plain content of the file
+## 3    | fix width  | Don't reload when width changes
+## 4    | fix height | Don't reload when height changes
+## 5    | fix both   | Don't ever reload
+## 6    | image      | Display the image `$IMAGE_CACHE_PATH` points to as an image preview
+## 7    | image      | Display the file directly as an image
 
-function handle_extension() {
-    case "$EXTENSION" in 
+filepath=$1
+width=$2
+height=$3
+
+by_extension() {
+    case ${filepath:e} in
         a|ace|alz|arc|arj|bz|bz2|cab|cpio|deb|gz|jar|lha|lz|lzh|lzma|lzo|rpm|rz|t7z|tar|tbz|tbz2|tgz|tlz|txz|tZ|tzo|war|xpi|xz|Z|zip)
-            timeout 1 bsdtar --list --file "${FILE_PATH}" && exit 5
-            exit 1;;
+            timeout 1 bsdtar --list --file "${filepath}" | tfold $width && exit 3;;
         rar)
-            unrar lt -p- -- "${FILE_PATH}" && exit 5
-            exit 1;;
+            unrar lt -p- -- "${filepath}" | tfold $width && exit 3;;
         7z)
-            7z l -p -- "${FILE_PATH}" && exit 5
-            exit 1;;
+            7z l -p -- "${filepath}" | tfold $width && exit 3;;
         pdf)
-            pdftotext -l 10 -nopgbrk -q -- "${FILE_PATH}" - | fmt -w "${WIDTH}" && exit 5
-            exit 1;;
+            pdftotext -l 10 -nopgbrk -q -- "${filepath}" - | tfold $width && exit 3;;
         json)
-            python -m json.tool -- "${FILE_PATH}" && exit 5
-            exit 1;;
+            python -m json.tool -- "${filepath}" | tfold $width && exit 3;;
     esac
 }
 
-function handle_mime() {
-    mime="$(file --dereference --brief --mime-type -- "${FILE_PATH}")"
-    text=''
-    case "$mime" in
+by_mime() {
+    mime=$(file --dereference --brief --mime-type -- "$filepath")
+    case $mime in
         text/* | */xml)
-            text="$(cat "$FILE_PATH")";;
+            tfold $width < $filepath && exit 3;;
 
+        # too slow & covered by fallback
         # image/*)
-        #     text="$(identify -format "%m %wx%h %[bit-depth]-bit %[colorspace]\n" "$FILE_PATH")";;
+        #     identify -format "%m %wx%h %[bit-depth]-bit %[colorspace]\n" "$filepath" | tfold $width && exit 3;;
 
         video/* | audio/*)
-            text="$(ffprobe -hide_banner "$FILE_PATH")";;
-        
+            ffprobe -hide_banner "$filepath" | tfold $width && exit 3;;
     esac
-
-    if [[ ! -z $text ]] {
-        echo "${text}" | tfold "$WIDTH" && exit 4
-    }
 }
 
-handle_fallback() {
-    echo '----- File Type Classification -----' && file --dereference --brief -- "${FILE_PATH}" && exit 5
-    exit 1
-}
+by_extension
+by_mime
 
-handle_extension
-handle_mime
-handle_fallback
+(echo '----- File Type Classification -----' && file --dereference --brief -- "$filepath") | tfold $width && exit 3
 exit 1
