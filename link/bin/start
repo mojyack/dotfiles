@@ -2,8 +2,8 @@
 
 set -e
 
-pushd ~/build/runit-configs/runit-user
-./generate-services
+pushd ~/build/runit-configs/user
+../scripts/generate-services
 source ./vars
 popd
 
