@@ -1,0 +1,2 @@
+bindsym XF86PowerOff       exec doas /usr/local/bin/suspend
+bindswitch --locked lid:on exec [ ! -f /tmp/no-lidswitch ] && doas /usr/local/bin/suspend

@@ -42,6 +42,11 @@ alias dosa='doas'
 alias sfs='~/build/simple-file-server/server.py'
 alias mksh='(){echo "#!/bin/zsh" > $1 && chmod u+x $1}'
 
+# for sway/fragments/suspend-binds
+alias lide="rm -f /tmp/no-lidswitch"
+alias lidd="touch /tmp/no-lidswitch"
+alias lids="if [[ -f /tmp/no-lidswitch ]]; then echo "disabled"; else echo "enabled"; fi"
+
 # binds
 bindkey -d
 bindkey -M vicmd 'H' vi-beginning-of-line
