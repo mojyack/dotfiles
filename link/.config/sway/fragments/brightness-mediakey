@@ -1,0 +1,4 @@
+bindsym XF86MonBrightnessUp         exec ~/bin/brightnessctl +$brightness_step0
+bindsym XF86MonBrightnessDown       exec ~/bin/brightnessctl -$brightness_step0
+bindsym Shift+XF86MonBrightnessUp   exec ~/bin/brightnessctl +$brightness_step
+bindsym Shift+XF86MonBrightnessDown exec ~/bin/brightnessctl -$brightness_step
