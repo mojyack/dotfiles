@@ -41,8 +41,9 @@ print_network_status() {
 }
 
 # $1 name
-print_screen_brightness_intel() {
-    read v < "/sys/class/backlight/intel_backlight/brightness"
+# $2 sysfs name
+print_screen_brightness() {
+    read v < "/sys/class/backlight/$2/brightness"
 
     echo '{'
     echo '"full_text":' "\" $v\","

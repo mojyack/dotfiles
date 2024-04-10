@@ -6,7 +6,7 @@ print_status() {
     print_load_average "cpuload"
     print_memory_usage "memory"
     print_network_status "network"
-    print_screen_brightness_intel "backlight"
+    print_screen_brightness "backlight" "intel_backlight"
     print_screen_brightness_gamma_daemon "backlight1" "HDMI-A-1"
     print_speeker_volume "volume"
     print_cputemp "temp" "/sys/class/thermal/thermal_zone0/temp"
