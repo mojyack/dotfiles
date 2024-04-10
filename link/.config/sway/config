@@ -121,20 +121,6 @@ mode "resize" {
 }
 bindsym $mod+w mode "resize"
 
-
-# status bar
-bar {
-    position top
-    font  "Hack 10"
-    height 19
-    status_command ~/bin/swaybar-status
-    colors {
-        statusline #e5e9f0
-        background #2e3440
-        inactive_workspace #323232 #323232 #5c5c5c
-    }
-}
-
 # windows
 titlebar_padding 5 1
 default_border pixel 1
