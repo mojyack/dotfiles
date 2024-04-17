@@ -1,0 +1,4 @@
+#!/bin/zsh
+# $1 value
+
+exec brightnessctl-sysfs "/sys/class/backlight/intel_backlight" $1

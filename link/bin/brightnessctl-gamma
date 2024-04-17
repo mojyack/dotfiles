@@ -1,4 +1,5 @@
 #!/bin/zsh
+# $1 value
 
 arr=($(swaymsg -pt get_outputs | grep focused))
 

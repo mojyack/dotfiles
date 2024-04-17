@@ -1,6 +1,8 @@
 #!/bin/zsh
+# $1 sysfs path
+# $2 value
 
-sys="/sys/class/backlight/intel_backlight"
+sys=$1
 
 if [[ $# != 1 ]]; then
     cat $sys/brightness
