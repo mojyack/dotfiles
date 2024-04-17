@@ -1,0 +1,4 @@
+include fragments/standard-status-bar
+
+set $brightness_step 10
+include fragments/brightness-mediakey
