@@ -1,15 +1,16 @@
 #!/bin/bash
+# $1 backlight_type
 
+brightnessctl="brightnessctl-$1"
 FLAG_PATH="/tmp/brightness"
-DISPLAY=$1
 
 on() {
-    brightnessctl $(cat $FLAG_PATH)
+    $brightnessctl $(cat $FLAG_PATH)
 }
 
 off() {
-    brightnessctl > $FLAG_PATH
-    brightnessctl 0
+    $brightnessctl > $FLAG_PATH
+    $brightnessctl 0
 }
 
 if [[ ! -e $FLAG_PATH ]]; then
@@ -27,7 +28,7 @@ if [[ $2 = "off" ]]; then
     exit 0
 fi
 
-if [[ $(brightnessctl) == 0 ]]; then
+if [[ $($brightnessctl) == 0 ]]; then
     on
 else
     off
