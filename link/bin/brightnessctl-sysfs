@@ -2,17 +2,21 @@
 # $1 sysfs path
 # $2 value
 
+if [[ $# < 1 ]]; then
+    exit 1
+fi
+
 sys=$1
 
-if [[ $# != 1 ]]; then
+if [[ $# < 2 ]]; then
     cat $sys/brightness
     exit 0
 fi
 
-if [[ $1 == -* || $1 == +* ]]; then
-    val=$(( $(cat $sys/brightness) + $1 ))
-else
-    val=$1
+val=$2
+
+if [[ $val == -* || $val == +* ]]; then
+    val=$(( $(cat $sys/brightness) + $val ))
 fi
 
 max_brightness=$(cat $sys/max_brightness)
