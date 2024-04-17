@@ -1,15 +1,16 @@
 #!/bin/bash
+# $1 display
 
+display=$1
 FLAG_PATH="/tmp/brightness-dpms"
-DISPLAY=$1
 
 on() {
-    swaymsg "output $DISPLAY dpms on"
+    swaymsg "output $display dpms on"
     echo on > $FLAG_PATH
 }
 
 off() {
-    swaymsg "output $DISPLAY dpms off"
+    swaymsg "output $display dpms off"
     echo off > $FLAG_PATH 
 }
 
