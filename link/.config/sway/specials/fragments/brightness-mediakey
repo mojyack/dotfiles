@@ -1,6 +1,6 @@
 # $backlight_type
 # $backlight_step
-bindsym XF86MonBrightnessUp         exec ~/bin/brightnessctl-$backlight_type +$brightness_step0
-bindsym XF86MonBrightnessDown       exec ~/bin/brightnessctl-$backlight_type -$brightness_step0
-bindsym Shift+XF86MonBrightnessUp   exec ~/bin/brightnessctl-$backlight_type +$brightness_step
-bindsym Shift+XF86MonBrightnessDown exec ~/bin/brightnessctl-$backlight_type -$brightness_step
+bindsym XF86MonBrightnessUp         exec ~/bin/brightnessctl-$backlight_type +$backlight_step0
+bindsym XF86MonBrightnessDown       exec ~/bin/brightnessctl-$backlight_type -$backlight_step0
+bindsym Shift+XF86MonBrightnessUp   exec ~/bin/brightnessctl-$backlight_type +$backlight_step
+bindsym Shift+XF86MonBrightnessDown exec ~/bin/brightnessctl-$backlight_type -$backlight_step
