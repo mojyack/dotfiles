@@ -1,0 +1,44 @@
+set $brightness_step 16
+include fragments/brightness-mediakey
+
+output DSI-1 scale 2
+input 1739:0:Synaptics_S3706B map_to_output DSI-1
+
+bindsym --release XF86PowerOff exec ~/bin/toggle-display-touch
+bindsym --release XF86AudioRaiseVolume+XF86AudioLowerVolume exec ~/bin/userfreeze
+
+bindsym --input-device=0:0:Alert_slider 1 exec ~/bin/swaybar-status-1 transform normal
+bindsym --input-device=0:0:Alert_slider 2 exec ~/bin/swaybar-status-1 transform 90
+bindsym --input-device=0:0:Alert_slider 3 fullscreen disable
+
+bar {
+    id 1
+    workspace_buttons no
+    position top
+    font  "Hack 10"
+    height 20
+    status_command ~/bin/swaybar-status-1 1
+    gaps 0 24
+    mode invisible
+    colors {
+        statusline #e5e9f0
+        background #2e3440
+        inactive_workspace #323232 #323232 #5c5c5c
+    }
+}
+
+bar {
+    id 2
+    workspace_buttons yes
+    position top
+    font  "Hack 10"
+    height 20
+    status_command ~/bin/swaybar-status-1 2
+    gaps 0 8
+    mode dock
+    colors {
+        statusline #e5e9f0
+        background #2e3440
+        inactive_workspace #323232 #323232 #5c5c5c
+    }
+}
