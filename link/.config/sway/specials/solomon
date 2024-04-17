@@ -3,15 +3,7 @@ include fragments/standard-status-bar
 set $backlight_type gamma
 set $backlight_step 1
 include fragments/brightness-mediakey
-
-bindsym $mod+F1         exec ~/bin/brightnessctl-gamma -5
-bindsym $mod+F2         exec ~/bin/brightnessctl-gamma +5
-bindsym Shift+$mod+F1   exec ~/bin/brightnessctl-gamma -1
-bindsym Shift+$mod+F2   exec ~/bin/brightnessctl-gamma +1
-bindsym $mod+F3         exec ~/bin/audioctl down 5
-bindsym $mod+F4         exec ~/bin/audioctl up 5
-bindsym Shift+$mod+F3   exec ~/bin/audioctl down 1
-bindsym Shift+$mod+F4   exec ~/bin/audioctl up 1
+include fragments/mod-fn-media-binds
 
 # sway freezes for a moment when manipulating dpms, and a key release event might be delayed.
 # and then binded command may be executed multiple times by a key repetition.
