@@ -1,4 +1,5 @@
-set $brightness_step 16
+set $backlight_type dsi
+set $backlight_step 16
 include fragments/brightness-mediakey
 
 output DSI-1 scale 2
