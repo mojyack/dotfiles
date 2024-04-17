@@ -1,0 +1,11 @@
+# $backlight_type
+# $backlight_step
+
+bindsym $mod+F1         exec ~/bin/brightnessctl-$backlight_type +$backlight_step0
+bindsym $mod+F2         exec ~/bin/brightnessctl-$backlight_type -$backlight_step0
+bindsym Shift+$mod+F1   exec ~/bin/brightnessctl-$backlight_type +$backlight_step
+bindsym Shift+$mod+F2   exec ~/bin/brightnessctl-$backlight_type -$backlight_step
+bindsym $mod+F3         exec ~/bin/audioctl down 5
+bindsym $mod+F4         exec ~/bin/audioctl up 5
+bindsym Shift+$mod+F3   exec ~/bin/audioctl down 1
+bindsym Shift+$mod+F4   exec ~/bin/audioctl up 1
