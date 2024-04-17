@@ -1,0 +1,49 @@
+include fragments/standard-status-bar
+
+bindsym XF86MonBrightnessUp         exec ~/bin/brightnessctl-gamma +5
+bindsym XF86MonBrightnessDown       exec ~/bin/brightnessctl-gamma -5
+bindsym Shift+XF86MonBrightnessUp   exec ~/bin/brightnessctl-gamma +1
+bindsym Shift+XF86MonBrightnessDown exec ~/bin/brightnessctl-gamma -1
+
+bindsym $mod+F1         exec ~/bin/brightnessctl-gamma -5
+bindsym $mod+F2         exec ~/bin/brightnessctl-gamma +5
+bindsym Shift+$mod+F1   exec ~/bin/brightnessctl-gamma -1
+bindsym Shift+$mod+F2   exec ~/bin/brightnessctl-gamma +1
+bindsym $mod+F3         exec ~/bin/audioctl down 5
+bindsym $mod+F4         exec ~/bin/audioctl up 5
+bindsym Shift+$mod+F3   exec ~/bin/audioctl down 1
+bindsym Shift+$mod+F4   exec ~/bin/audioctl up 1
+
+# sway freezes for a moment when manipulating dpms, and a key release event might be delayed.
+# and then binded command may be executed multiple times by a key repetition.
+# here bind to on-release for a workaround to this issue.
+bindsym --release $mod+F5 output HDMI-A-1 dpms toggle; output DP-1 dpms toggle
+
+output DP-1 {
+    scale 2
+    pos 0 0
+    transform 180
+}
+
+output HDMI-A-1 {
+    scale 3
+    #pos 2000 0
+    transform 180
+}
+
+set $main HDMI-A-1
+set $sub DP-1
+workspace 1 output $main
+workspace 2 output $main
+workspace 3 output $main
+workspace 4 output $main
+workspace 5 output $main
+workspace 6 output $sub
+workspace 7 output $sub
+workspace 8 output $sub
+workspace 9 output $main
+workspace 0 output $main
+
+xwayland enable
+
+exec mkdir -p /tmp/brightness && cd /tmp/brightness && exec ~/build/wlr-gamma-daemon/out/wlr-gamma-daemon
