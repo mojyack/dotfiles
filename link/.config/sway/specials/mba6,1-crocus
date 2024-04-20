@@ -1,0 +1,14 @@
+include fragments/standard-status-bar
+include fragments/suspend-binds
+
+set $backlight_type acpi
+set $backlight_step 1
+include fragments/brightness-mediakey
+
+input 1452:656:bcm5974 {
+    pointer_accel 0.50 
+    scroll_factor 0.80
+    natural_scroll enabled
+    tap enabled
+    click_method button_areas
+}

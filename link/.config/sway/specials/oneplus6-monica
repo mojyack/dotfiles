@@ -6,6 +6,7 @@ output DSI-1 scale 2
 input 1739:0:Synaptics_S3706B map_to_output DSI-1
 
 bindsym --release XF86PowerOff exec ~/bin/toggle-display-touch
+bindsym --release XF86PowerOff+XF86AudioRaiseVolume input 1739:0:Synaptics_S3706B events toggle
 bindsym --release XF86AudioRaiseVolume+XF86AudioLowerVolume exec ~/bin/userfreeze
 
 bindsym --input-device=0:0:Alert_slider 1 exec ~/bin/swaybar-status-1 transform normal

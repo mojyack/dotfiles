@@ -1,0 +1,26 @@
+include fragments/standard-status-bar
+
+set $backlight_type intel
+set $backlight_step 10
+include fragments/brightness-mediakey
+
+set $built_in_display eDP-1
+
+output $built_in_display scale 1.5
+
+# input
+input 9639:64016:Nordic_2.4G_Wireless_Receiver_Mouse {
+    pointer_accel -0.6
+    scroll_factor 1.5
+}
+
+input 1267:10780:ELAN9038:00_04F3:2A1C {
+    map_to_output $built_in_display
+} 
+
+bindsym XF86PowerOff exec ~/bin/toggle-display-touch
+
+bindsym --input-device=0:0:Intel_HID_5_button_array XF86AudioRaiseVolume fullscreen disable; exec killall -s 34 wvkbd
+
+exec ~/bin/wvkbd --hidden
+
