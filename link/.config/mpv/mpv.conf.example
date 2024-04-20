@@ -1,0 +1,13 @@
+vo=gpu
+ao=pipewire
+gpu-context=wayland
+force-window=yes
+quiet=yes
+profile=normal
+
+[normal]
+ytdl-format=bestvideo[height<=?1080][fps<=?60]+bestaudio/best
+
+[vaapi]
+hwdec=vaapi
+ytdl-format=bestvideo[height<=?1080][fps<=?60][vcodec=acv1]+bestaudio/best
