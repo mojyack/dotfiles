@@ -10,6 +10,7 @@ local function config()
         AllowShortIfStatementsOnASingleLine = "true",
         AlignConsecutiveAssignments = "true",
         AlignConsecutiveDeclarations = "true",
+        AlignConsecutiveMacros = "true",
     }
 
     vim.api.nvim_create_autocmd("FileType", {
