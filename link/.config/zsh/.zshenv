@@ -1,6 +1,7 @@
 typeset -U path
 path=(~/bin $path[@])
 
+export LANG=en_US.UTF-8
 export EDITOR=nvim
 
 # ccache
