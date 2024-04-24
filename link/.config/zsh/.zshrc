@@ -42,6 +42,10 @@ alias dosa='doas'
 alias sfs='~/build/simple-file-server/server.py'
 alias mksh='(){echo "#!/bin/zsh" > $1 && chmod u+x $1}'
 
+# runit
+alias svs='(){ doas sv $1 /run/runit/services/$2 }'
+alias svu='(){ sv $1 /tmp/user/1000/runit/services/$2 }'
+
 # for sway/fragments/suspend-binds
 alias lide="rm -f /tmp/no-lidswitch"
 alias lidd="touch /tmp/no-lidswitch"
