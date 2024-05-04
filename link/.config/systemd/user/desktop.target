@@ -1,0 +1,6 @@
+[Unit]
+Requires=sway.service
+Wants=pipewire.socket pipewire-pulse.socket wireplumber.service fcitx5.service xdg-desktop-portal.service
+
+[Install]
+WantedBy=default.target

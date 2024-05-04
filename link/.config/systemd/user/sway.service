@@ -1,0 +1,20 @@
+[Unit]
+
+[Service]
+Environment=XDG_CURRENT_DESKTOP=sway
+
+Environment=QT_QPA_PLATFORM=wayland-egl
+Environment=QT_QPA_PLATFORMTHEME="qt5ct"
+Environment=LIBSEAT_BACKEND=logind
+
+Environment=MOZ_ENABLE_WAYLAND=1
+Environment=XDG_SESSION_TYPE=wayland
+Environment=GTK_IM_MODULE=fcitx
+Environment=QT_IM_MODULE=fcitx
+Environment=XMODIFIERS="@im=fcitx"
+#Environment=WLR_RENDERER=vulkan
+
+# ignore /dev/dri/card1, since this is a simple-drm device
+Environment=WLR_DRM_DEVICES=/dev/dri/card0
+
+ExecStart=/usr/bin/sway
