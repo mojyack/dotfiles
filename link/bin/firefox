@@ -1,2 +1,12 @@
 #!/usr/bin/env zsh
-exec /usr/lib/firefox/firefox $@
+
+# $1 path
+try_exec() {
+    if [[ -e $1 ]]; then
+        exec $@
+    fi
+}
+
+try_exec /usr/lib/firefox/firefox $@
+try_exec /usr/lib64/firefox/firefox $@
+echo "no firefox found"
