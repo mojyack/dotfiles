@@ -50,6 +50,7 @@ if [[ $runit == 1 ]]; then
 else
     alias slp='doas systemctl suspend'
     alias slpe='{ sleep 1; doas systemctl suspend; }&; tmux detach'
+    alias start='systemctl --user start desktop.target'
 fi
 
 # for sway/fragments/suspend-binds
