@@ -1,0 +1,21 @@
+include fragments/standard-status-bar
+include fragments/suspend-binds
+
+set $backlight_type intel
+set $backlight_step 1000
+include fragments/brightness-mediakey
+
+output eDP-1 {
+    scale 1.5
+}
+
+input 1739:52629:SYNP1F13:00_06CB:CD95_Touchpad {
+    pointer_accel 0.50
+    scroll_factor 0.80
+    natural_scroll enabled
+    tap enabled
+}
+
+input 8146:32774:SAPS2101:00_1FD2:8006 {
+    map_to_output eDP-1
+}
