@@ -7,7 +7,7 @@ pushd ~/build/runit-configs/user
 source ./vars
 popd
 
-if ! pgrep -u $(id -u) -x runsvdir; then
+if ! pgrep -u $(id -u) -x runsvdir > /dev/null; then
     env -i HOME="$HOME" runsvdir "$svroot/services" 'log: ..........................................' &
 fi
 
