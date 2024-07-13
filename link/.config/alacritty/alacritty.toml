@@ -1,0 +1,28 @@
+live_config_reload = false
+
+[colors.bright]
+black   = "0x425059"
+blue    = "0x81A2BE"
+cyan    = "0x8ABEB7"
+green   = "0xB5BD68"
+magenta = "0xB294BB"
+red     = "0xCC6666"
+white   = "0xC5C8C6"
+yellow  = "0xF0C674"
+
+[colors.normal]
+black   = "0x2D3C46"
+blue    = "0x5F819D"
+cyan    = "0x5E8D87"
+green   = "0x8C9440"
+magenta = "0x85678F"
+red     = "0xA54242"
+white   = "0x6C7A80"
+yellow  = "0xDE935F"
+
+[colors.primary]
+background = "0x232C31"
+foreground = "0xC5C8C6"
+
+[font.normal]
+family = "Cascadia Code"
