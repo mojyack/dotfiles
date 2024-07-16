@@ -1,11 +1,11 @@
 -- basic options
-vim.o.expandtab = true
-vim.o.tabstop = 4
-vim.o.shiftwidth = 0
-vim.o.completeopt = "menuone,noinsert,noselect"
-vim.o.encoding = "utf-8"
-vim.o.clipboard = "unnamedplus"
-vim.o.nowrap = true
+vim.opt.expandtab = true
+vim.opt.tabstop = 4
+vim.opt.shiftwidth = 0
+vim.opt.completeopt = "menuone,noinsert,noselect"
+vim.opt.encoding = "utf-8"
+vim.opt.clipboard = "unnamedplus"
+vim.opt.wrap = false
 
 -- basic keybinds
 vim.g.mapleader = " "
@@ -25,7 +25,7 @@ keymap("n", "<C-PageDown>", ":+tabmove<CR>")
 keymap("n", "<C-PageUp>", ":-tabmove<CR>")
 
 -- appearance
-vim.o.termguicolors = true
+vim.opt.termguicolors = true
 vim.g.hybrid_custom_term_colors = 1
 vim.g.hybrid_reduced_contrast = 1
 vim.cmd("colorscheme hybrid")
