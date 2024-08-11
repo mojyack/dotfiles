@@ -42,6 +42,7 @@ alias run='(){$@ > /dev/null 2>&1 &!}'
 alias dosa='doas'
 alias sfs='~/build/simple-file-server/server.py'
 alias mksh='(){echo "#!/bin/zsh" > $1 && chmod u+x $1}'
+alias git-syu='git submodule update --remote && git submodule foreach git submodule update --checkout --recursive'
 if [[ $runit == 1 ]]; then
     alias slp='doas /usr/local/bin/suspend'
     alias slpe='{ sleep 1; doas /usr/local/bin/suspend; }&; tmux detach'
