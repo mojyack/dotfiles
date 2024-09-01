@@ -32,8 +32,8 @@ autoload -U colors && colors
     PROMPT="$current_dir$new_line$user@$host%# "
 }
 
-# is runit or systemd?
-[[ $(readlink /sbin/init) == "runit-init" ]] && runit=1
+# is daemonfs or systemd?
+[[ $(readlink /sbin/init) == "barebone-init" ]] && daemonfs=1
 
 # alias
 alias ls='ls --color=auto'
@@ -44,11 +44,11 @@ alias sfs='~/build/simple-file-server/server.py'
 alias mksh='(){echo "#!/bin/zsh" > $1 && chmod u+x $1}'
 alias git-u='git submodule foreach git submodule update --checkout --recursive'
 alias git-syu='git submodule update --remote && git-u'
-if [[ $runit == 1 ]]; then
+if [[ $daemonfs == 1 ]]; then
     alias slp='doas /usr/local/bin/suspend'
     alias slpe='{ sleep 1; doas /usr/local/bin/suspend; }&; tmux detach'
-    alias svs='(){ doas sv $1 /run/runit/services/$2 }'
-    alias svu='(){ sv $1 /tmp/user/1000/runit/services/$2 }'
+    alias svs='(){ echo $1 | doas tee /run/daemons/$2/state }'
+    alias svu='(){ echo $1 | tee /tmp/user/$(id -u)/daemons/$2/state }'
 else
     alias slp='doas systemctl suspend'
     alias slpe='{ sleep 1; doas systemctl suspend; }&; tmux detach'
