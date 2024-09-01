@@ -6,6 +6,7 @@ pushd ~/build/daemonfs-configs/user
 source ./vars
 if ! mountpoint -q "$XDG_RUNTIME_DIR/daemons"; then
     mkdir -p "$XDG_RUNTIME_DIR/daemons"
+    chmod 700 "$XDG_RUNTIME_DIR"
     daemonfs -b bootstrap "$XDG_RUNTIME_DIR/daemons" > $XDG_RUNTIME_DIR/daemonfs-log 2>&1 &!
 fi
 popd
