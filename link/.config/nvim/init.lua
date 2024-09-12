@@ -25,10 +25,11 @@ keymap("n", "<C-PageDown>", ":+tabmove<CR>")
 keymap("n", "<C-PageUp>", ":-tabmove<CR>")
 
 -- appearance
-vim.opt.termguicolors = true
-vim.g.hybrid_custom_term_colors = 1
-vim.g.hybrid_reduced_contrast = 1
-vim.cmd("colorscheme hybrid")
+vim.cmd("colorscheme habamax")
+vim.cmd("hi Normal guibg=#232C31")
+vim.cmd("hi Visual guifg=NONE guibg=#425059")
+vim.cmd("hi MatchParen guifg=#F0C674 guibg=#6C7A80")
+vim.cmd("hi @lsp.type.function.cpp guifg=#8C9440")
 
 -- extra
 vim.g.python3_host_prog = "/usr/bin/python3"
