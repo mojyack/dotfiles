@@ -25,6 +25,7 @@ keymap("n", "<C-PageDown>", ":+tabmove<CR>")
 keymap("n", "<C-PageUp>", ":-tabmove<CR>")
 
 -- appearance
+vim.opt.termguicolors = true
 vim.cmd("colorscheme habamax")
 vim.cmd("hi Normal guibg=#232C31")
 vim.cmd("hi Visual guifg=NONE guibg=#425059")
