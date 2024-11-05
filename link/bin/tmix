@@ -1,13 +1,8 @@
 #!/usr/bin/env zsh
 
-if [[ ! "$#" -eq 0 ]] {
-    type tmux >/dev/null 2>&1
-    exit 
-} elif [[ -z $TMUX ]] {
-    tmux has-session >/dev/null 2>&1 && tmux list-sessions >/dev/null 2>&1
-    if [[ ! $? -eq 0 ]] {
-        exec tmux new -s $(whoami)
-    } else {
-        exec tmux a -t $(whoami)
-    }
-}
+if (( $# > 0 )); then
+    session=$1
+else
+    session=$(whoami)
+fi
+exec tmux new -A -s "$session"
