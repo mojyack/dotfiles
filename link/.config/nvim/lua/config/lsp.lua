@@ -18,10 +18,23 @@ local function find_project_root(path)
            util.find_git_ancestor(path)
 end
 
+local function find_project_root_zls(path)
+    local util = require("lspconfig.util")
+    local markers = {
+        "build.zig",
+    }
+    return util.root_pattern(unpack(markers))(path) or
+           util.find_git_ancestor(path)
+end
+
 local clangd_command = {
     "clangd",
     "--clang-tidy",
     "--header-insertion=never",
+}
+
+local zls_command = {
+    "zls",
 }
 
 local function on_attach(client, bufnr)
@@ -49,10 +62,17 @@ local function config()
         root_dir = find_project_root,
         on_attach = on_attach,
     })
+    lspconfig["zls"].setup({
+        capabilities = capabilities,
+        filetypes = {"zig"},
+        cmd = zls_command,
+        root_dir = find_project_root_zls,
+        on_attach = on_attach,
+    })
 end
 
 return {
     "neovim/nvim-lspconfig",
-    ft = {"c", "cpp", "objc", "objcpp"},
+    ft = {"c", "cpp", "objc", "objcpp", "zig"},
     config = config,
 }
