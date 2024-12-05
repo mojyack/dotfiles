@@ -43,7 +43,7 @@ print_network_status() {
 # $1 name
 # $2 sysfs name
 print_screen_brightness() {
-    read v < "/sys/class/backlight/$2/brightness"
+    v=$(</sys/class/backlight/$2/brightness)
 
     echo '{'
     echo '"full_text":' "\" $v\","
@@ -54,7 +54,7 @@ print_screen_brightness() {
 # $1 name
 # $2 output name
 print_screen_brightness_gamma_daemon() {
-    read v < "/tmp/brightness/$2"
+    v=$(/tmp/brightness/$2)
 
     echo '{'
     echo '"full_text":' "\" $v\","
@@ -82,7 +82,7 @@ print_speeker_volume() {
 # $1 name
 # $2 sysfs path
 print_cputemp() {
-    read v < $2
+    v=$(<$2)
     t=" $(($v / 1000))°C"
 
     echo '{'
@@ -96,9 +96,9 @@ print_cputemp() {
 # $3 status prefix
 print_battery_status() {
     sysfs="/sys/class/power_supply/$2"
-    read now < $sysfs/${3}_now
-    read full < $sysfs/${3}_full
-    read state < $sysfs/status
+    now=$(<$sysfs/${3}_now)
+    full=$(<$sysfs/${3}_full)
+    state=$(<$sysfs/status)
     if [[ $state == "Discharging" ]]; then
         i="-"
     elif [[ $state == "Charging" ]]; then
