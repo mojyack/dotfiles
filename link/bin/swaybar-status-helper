@@ -64,7 +64,7 @@ print_screen_brightness_gamma_daemon() {
 
 # $1 name
 print_speeker_volume() {
-    arr=($(wpctl get-volume @DEFAULT_AUDIO_SINK@))
+    arr=($(wpctl get-volume @DEFAULT_AUDIO_SINK@ 2>/dev/null))
     v=$arr[2]
 
     if [[ $arr[3] == '[MUTED]' ]]; then
