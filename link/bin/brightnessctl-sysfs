@@ -9,17 +9,16 @@ fi
 sys=$1
 
 if [[ $# < 2 ]]; then
-    cat $sys/brightness
-    exit 0
+    exec cat $sys/brightness
 fi
 
 val=$2
 
 if [[ $val == -* || $val == +* ]]; then
-    val=$(( $(cat $sys/brightness) + $val ))
+    val=$(( $(<$sys/brightness) + $val ))
 fi
 
-max_brightness=$(cat $sys/max_brightness)
+max_brightness=$(<$sys/max_brightness)
 if (( $val > $max_brightness )); then
     val=$max_brightness
 elif (( $val < 0 )); then
