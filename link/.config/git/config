@@ -9,3 +9,14 @@
 	ui = auto
 [pull]
 	rebase = true
+[sendemail]
+    confirm = auto
+    smtpServer = smtp.gmail.com
+    smtpServerPort = 587
+    smtpEncryption = tls
+    smtpUser = mojyack@gmail.com
+[sendemail.kernel]
+    tocmd ="scripts/get_maintainer.pl --nogit-fallback --norolestats --nol"
+    cccmd ="scripts/get_maintainer.pl --nogit-fallback --norolestats --nom"
+[include]
+    path = config.local
