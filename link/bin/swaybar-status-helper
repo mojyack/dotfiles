@@ -54,7 +54,7 @@ print_screen_brightness() {
 # $1 name
 # $2 output name
 print_screen_brightness_gamma_daemon() {
-    v=$(/tmp/brightness/$2)
+    v=$(</tmp/brightness/$2)
 
     echo '{'
     echo '"full_text":' "\" $v\","
