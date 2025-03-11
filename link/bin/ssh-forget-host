@@ -1,0 +1,8 @@
+#!/bin/zsh
+# $1 the last command "ssh ...@..."
+
+command=$1
+command=${command/@/ }
+command=($(echo $command))
+host=${command[-1]}
+exec ssh-keygen -R "$host"
