@@ -1,0 +1,16 @@
+#!/bin/zsh
+# create deeper directory by duplicated last N path elements and move files to it
+# $1..n-1 files
+# $n      depth
+# destination directory path is constructed based on $1
+
+if (( $# < 2 )); then
+    echo "bad usage"
+    exit 1
+fi
+
+abs=${1:a}
+dir=${abs:h}
+eval file=\${abs:t$((${@[-1]}+1))}
+res=$dir/$file
+mkdir -p "${res:h}" && mv "${@:1:-1}" "${res:h}"

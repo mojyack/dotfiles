@@ -1,0 +1,11 @@
+#!/bin/zsh
+# create new directory and move files to it
+# $1..n-1 files
+# $n      dest dir
+
+if (( $# < 2 )); then
+    echo "bad usage"
+    exit 1
+fi
+
+mkdir -p "${@[-1]}" && recursive-move "$@"
