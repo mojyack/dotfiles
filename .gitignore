@@ -1,0 +1,4 @@
+# managed by ya pack
+/link/.config/yazi/package.toml
+/link/.config/yazi/plugins/smart-enter.yazi
+/link/.config/yazi/plugins/toggle-pane.yazi

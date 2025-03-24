@@ -1,0 +1,42 @@
+# https://github.com/sxyazi/yazi/blob/shipped/yazi-config/preset/keymap-default.toml
+
+[manager]
+prepend_keymap = [
+    { on = "q", run = "close" },
+    { on = "<C-c>", run = "quit" },
+    { on = "k", run = "plugin arrow -1" },
+    { on = "j", run = "plugin arrow +1" },
+    { on = "l", run = "plugin smart-enter" },
+    { on = "K", run = "arrow -100%" },
+    { on = "J", run = "arrow 100%" },
+    { on = "<C-k>", run = "plugin parent-arrow -1" },
+    { on = "<C-j>", run = "plugin parent-arrow +1" },
+    { on = "x", run = "shell --interactive --orphan --cursor=0 ' \"$@\"'"},
+    { on = "X", run = "shell --interactive --blocking --cursor=0 ' \"$@\"'"},
+    { on = "<C-y>", run = "unyank"},
+    { on = "d", run = "yank --cut"},
+    { on = "D", run = ["shell 'trash \"$@\"'", "escape --select"]},
+    { on = "<C-d>", run = "remove --permanently"},
+    { on = "S", run = "shell 'RANGER_LEVEL=1 \"$SHELL\"' --block"},
+    { on = "i", run = "plugin toggle-pane max-preview" },
+    { on = "I", run = "plugin toggle-pane min-preview" },
+    { on = "<Up>", run = "seek -1" },
+    { on = "<Down>", run = "seek +1" },
+    { on = "<S-Up>", run = "seek -5" },
+    { on = "<S-Down>", run = "seek +5" },
+    { on = "v", run = "toggle_all" },
+    { on = "V", run = "visual_mode" },
+    { on = "a", run = "rename --cursor=before_ext" },
+    { on = "A", run = "rename --cursor=end" },
+    { on = "<C-a>", run = "rename --empty=all" },
+    { on = "R", run = "shell 'bulkrename \"$@\"'" },
+    { on = "P", run = ["plugin merge-paste"] },
+    { on = "m", run = ["shell --interactive --cursor=17 'togetherize \"$@\" '", "escape --select"] },
+    { on = "M", run = ["shell 'togetherize \"$@\" \"$(basename \"$PWD\")\"'", "escape --select"] },
+    { on = "B", run = ["shell --interactive --cursor=13 'isolate \"$@\" '", "escape --select"] },
+]
+
+[input]
+prepend_keymap = [
+    { on = "<Esc>", run  = "close"},
+]
