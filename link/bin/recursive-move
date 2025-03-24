@@ -4,41 +4,63 @@ import os
 import sys
 import shutil
 
-if len(sys.argv) < 3:
+args = sys.argv[1:]
+move = True
+if args[0] == "--copy":
+    move = False
+    args = args[1:]
+
+if len(args) < 2:
+    print("bad usage")
     exit(1)
 
-join   = os.path.join
+join = os.path.join
 exists = os.path.exists
+isdir = os.path.isdir
 isfile = os.path.isfile
 islink = os.path.islink
 
-def move(src, dst):
-    if not exists(dst) and not islink(dst):
-        print(src, "->", dst)
+
+def copy(src, dst):
+    print(f"* copy src={src} dst={dst}")
+    if src == dst:
+        print("same operands")
+        return False
+    # ensure dst is not a invalid link
+    if not exists(dst) and islink(dst):
+        print("broken destination")
+        return False
+    # if dst not exists, simply copy
+    if not exists(dst):
+        print("creating destination")
         if islink(src):
             os.symlink(os.readlink(src), dst)
-            os.unlink(src)
+            if move:
+                os.unlink(src)
         else:
-            shutil.move(src, dst)
+            if move:
+                shutil.move(src, dst)
+            else:
+                if isdir(src):
+                    shutil.copytree(src, dst)
+                else:
+                    shutil.copy2(src, dst)
         return True
-    if isfile(src) or isfile(dst):
-        print("skipped:", src)
+    # can't continue unless src and dst are both directory
+    if not isdir(src) or not isdir(dst):
+        print("skipping")
         return False
 
     empty = True
     for file in os.listdir(src):
-        empty &= move(join(src, file), join(dst, file))
-
-    if empty:
+        empty &= copy(join(src, file), join(dst, file))
+    if empty and move:
         os.rmdir(src)
 
     return empty
 
-for src in sys.argv[1:-1]:
+
+for src in args[:-1]:
     name = os.path.basename(src)
-    if name[-1] == '/':
-        dst = sys.argv[-1]
-    else:
-        dst = os.path.join(sys.argv[-1], name)
-    print(src, dst)
-    move(src, dst)
+    dst = os.path.join(args[-1], name)
+    copy(src, dst)
