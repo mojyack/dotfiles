@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/zsh
 
 dir=$XDG_CONFIG_HOME/yazi/plugins
 plugins=(smart-enter toggle-pane)
