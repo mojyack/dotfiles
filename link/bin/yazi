@@ -1,0 +1,10 @@
+#!/bin/sh
+
+dir=$XDG_CONFIG_HOME/yazi/plugins
+plugins=(smart-enter toggle-pane)
+for plugin in $plugins; do
+    if [[ ! -e $dir/$plugin.yazi ]]; then
+        ya pack -a yazi-rs/plugins:$plugin
+    fi
+done
+exec /usr/bin/yazi "$@"
