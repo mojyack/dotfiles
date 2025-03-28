@@ -31,9 +31,9 @@ prepend_keymap = [
     { on = "<C-a>", run = "rename --empty=all" },
     { on = "R", run = "shell 'bulkrename \"$@\"'" },
     { on = "P", run = ["plugin merge-paste"] },
-    { on = "m", run = ["shell --interactive --cursor=17 'togetherize \"$@\" '", "escape --select"] },
-    { on = "M", run = ["shell 'togetherize \"$@\" \"$(basename \"$PWD\")\"'", "escape --select"] },
-    { on = "B", run = ["shell --interactive --cursor=13 'isolate \"$@\" '", "escape --select"] },
+    { on = "b", run = ["shell --interactive --cursor=17 'togetherize \"$@\" '", "escape --select"] },
+    { on = "B", run = ["shell 'togetherize \"$@\" \"$(basename \"$PWD\")\"'", "escape --select"] },
+    { on = "<C-b>", run = ["shell --interactive --cursor=13 'isolate \"$@\" '", "escape --select"] },
 ]
 
 [input]
