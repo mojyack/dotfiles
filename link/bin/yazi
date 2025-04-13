@@ -1,7 +1,7 @@
 #!/bin/zsh
 
 dir=$XDG_CONFIG_HOME/yazi/plugins
-plugins=(smart-enter toggle-pane)
+plugins=(smart-enter)
 for plugin in $plugins; do
     if [[ ! -e $dir/$plugin.yazi ]]; then
         ya pack -a yazi-rs/plugins:$plugin
