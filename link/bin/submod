@@ -1,0 +1,90 @@
+#!/bin/bash
+
+set -e
+
+help() {
+    echo "usage: submod clone       clone repositories"
+    echo "       submod pull        pull main branch of each repositories"
+    echo "       submod dump        dump current commit hashes to submodules.txt"
+    echo "       submod update      update commit hashes in submodules.txt"
+    echo "       submod help        print this help message"
+}
+
+store="submodules"
+list="submodules.txt"
+
+# $1 string
+# -> name,url,rev
+parse_line() {
+    local elms=($1)
+    name=${elms[0]}
+    url=${elms[1]}
+    rev=${elms[2]}
+}
+
+# $1? project dir
+clone() {
+    local proj=${1:-.}
+    echo "reading $proj/$list"
+
+    # clone
+    while read line; do
+        parse_line "$line"
+        local dir="$store/$name"
+        if [[ -e $dir ]]; then
+            continue
+        fi
+        git clone --recursive "$url" "$dir"
+        if [[ ! -z "$rev" ]]; then
+            git -C "$dir" checkout "$rev"
+        fi
+    done < "$proj/$list"
+
+    # recursive
+    while read line; do
+        parse_line "$line"
+        local dir="$store/$name"
+        if [[ ! -e "$dir/$list" || -e "$dir/$store" ]]; then
+            continue
+        fi
+        clone "$dir"
+        local rel=$(realpath --relative-to "$dir/$store" "$store")
+        ln -s "$rel/$store" "$dir/$store"
+    done < "$proj/$list"
+}
+
+# $1 dir
+dump_line() {
+    name="${1##*/}"
+    elms=($(git -C "$1" remote -v | grep '(fetch)'))
+    url=${elms[1]}
+    rev=$(git -C "$1" rev-parse HEAD)
+    echo $name $url $rev
+}
+
+dump() {
+    for dir in "$store"/*; do
+        dump_line "$dir" >> "$list.new"
+    done
+    mv "$list.new" "$list"
+    echo "done"
+}
+
+update() {
+    while read line; do
+        parse_line "$line"
+        dump_line "$store/$name" >> "$list.new"
+    done < "$list"
+    mv "$list.new" "$list"
+    echo "done"
+}
+
+pull() {
+    for dir in "$store"/*; do
+        git -C "$dir" checkout main
+        git -C "$dir" pull &
+    done
+    wait
+}
+
+$1
