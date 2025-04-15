@@ -2,4 +2,5 @@
 /build
 /debug
 /release
+/submodules
 /compile_flags.txt
