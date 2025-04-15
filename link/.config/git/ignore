@@ -1,1 +1,5 @@
-compile_flags.txt
+/.cache
+/build
+/debug
+/release
+/compile_flags.txt
