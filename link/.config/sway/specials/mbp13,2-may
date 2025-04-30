@@ -1,0 +1,28 @@
+set $backlight_type acpi
+set $backlight_step 1
+include fragments/brightness-mediakey
+include fragments/suspend-binds
+include fragments/standard-status-bar
+
+set $kbd_backlight_step 2
+bindsym XF86KbdBrightnessUp         exec ~/bin/brightnessctl-kbd +$kbd_backlight_step0
+bindsym XF86KbdBrightnessDown       exec ~/bin/brightnessctl-kbd -$kbd_backlight_step0
+bindsym Shift+XF86KbdBrightnessUp   exec ~/bin/brightnessctl-kbd +$kbd_backlight_step
+bindsym Shift+XF86KbdBrightnessDown exec ~/bin/brightnessctl-kbd -$kbd_backlight_step
+
+# bindsym XF86AudioPlay
+# bindsym XF86AudioPrev
+# bindsym XF86AudioNext
+
+output eDP-1 {
+    scale 2
+}
+
+input 1739:1367:Apple_SPI_Touchpad {
+    pointer_accel 0.50 
+    scroll_factor 0.80
+    natural_scroll enabled
+    tap enabled
+    dwt enabled
+    click_method button_areas
+}
