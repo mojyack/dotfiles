@@ -1,0 +1,11 @@
+set $backlight_type pocket-reform
+set $backlight_step 1
+include fragments/mod-fn-media-binds
+include fragments/standard-status-bar
+
+bindsym $mod+F5 exec doas /usr/local/bin/suspend
+
+output DSI-1 {
+    transform 270
+    scale 2
+}
