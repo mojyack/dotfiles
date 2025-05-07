@@ -1,0 +1,7 @@
+#!/bin/zsh
+
+c=1
+for file in $@; do
+    mv "$file" "$(date '+%Y-%m-%d %H:%M:%S')-$c.${file:e}"
+    c=$(($c + 1))
+done
