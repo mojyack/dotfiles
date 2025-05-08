@@ -6,7 +6,7 @@ if ! which totp-linux 2>&1 >/dev/null ; then
     exit 1
 fi
 
-db="$HOME/build/password/data/totp.json"
+db="$HOME/build/password/data/totp.safe"
 if [[ ! -e $db ]] then
     echo "database not found"
     exit 1
@@ -16,7 +16,7 @@ totp_home="/tmp/.rustotpony"
 trap 'rm -r "$totp_home"; exit 1' INT
 
 mkdir -p "$totp_home"
-ln -s "$db" "$totp_home/db.json"
+ln -s "$db" "$totp_home/totp.safe"
 
 HOME="$totp_home:h" totp-linux $@
 rm -r "$totp_home"
