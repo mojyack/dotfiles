@@ -1,40 +1,27 @@
-local function find_project_root(path)
-    local util = require("lspconfig.util")
-    local markers = {
-        "Makefile",
-        "configure.ac",
-        "configure.in",
-        "config.h.in",
-        "meson.build",
-        "meson_options.txt",
-        "build.ninja",
-    }
-    local markers_second = {
-        "compile_commands.json",
-        "compile_flags.txt",
-    }
-    return util.root_pattern(unpack(markers))(path) or
-           util.root_pattern(unpack(markers_second))(path) or
-           util.find_git_ancestor(path)
-end
-
-local function find_project_root_zls(path)
-    local util = require("lspconfig.util")
-    local markers = {
-        "build.zig",
-    }
-    return util.root_pattern(unpack(markers))(path) or
-           util.find_git_ancestor(path)
-end
-
 local clangd_command = {
     "clangd",
     "--clang-tidy",
     "--header-insertion=never",
 }
 
+local clangd_markers = {
+    "Makefile",
+    "configure.ac",
+    "configure.in",
+    "config.h.in",
+    "meson.build",
+    "meson_options.txt",
+    "build.ninja",
+    "compile_commands.json",
+    "compile_flags.txt",
+}
+
 local zls_command = {
     "zls",
+}
+
+local zls_markers = {
+    "build.zig",
 }
 
 local function on_attach(client, bufnr)
@@ -49,30 +36,28 @@ local function on_attach(client, bufnr)
     keymap("n", "<leader>lr", vim.lsp.buf.rename)
     keymap("n", "<leader>la", vim.lsp.buf.code_action)
     keymap("n", "<leader>lc", "<cmd>ClangdSwitchSourceHeader<cr>")
+
+    vim.lsp.completion.enable(true, client.id, bufnr, {
+        autotrigger = true,
+        convert = function(item)
+            return { abbr = item.label:gsub('%b()', '') }
+        end,
+    })
+    keymap("i", "<C-l>", function() vim.lsp.completion.get() end)
 end
 
-local function config()
-    local lspconfig = require("lspconfig")
-    local cmp_nvim_lsp = require("cmp_nvim_lsp")
-    local capabilities = cmp_nvim_lsp.default_capabilities()
-    lspconfig["clangd"].setup({
-        capabilities = capabilities,
-        filetypes = {"c", "cpp", "objc", "objcpp"},
-        cmd = clangd_command,
-        root_dir = find_project_root,
-        on_attach = on_attach,
-    })
-    lspconfig["zls"].setup({
-        capabilities = capabilities,
-        filetypes = {"zig"},
-        cmd = zls_command,
-        root_dir = find_project_root_zls,
-        on_attach = on_attach,
-    })
-end
-
-return {
-    "neovim/nvim-lspconfig",
-    ft = {"c", "cpp", "objc", "objcpp", "zig"},
-    config = config,
+vim.lsp.config.clangd = {
+    filetypes = {"c", "cpp", "objc", "objcpp"},
+    cmd = clangd_command,
+    root_markers = clangd_markers,
+    on_attach = on_attach,
 }
+
+vim.lsp.config.zls = {
+    filetypes = {"zig"},
+    cmd = zls_command,
+    root_markers = zls_markers,
+    on_attach = on_attach,
+}
+
+vim.lsp.enable({"clangd", "zls"})
