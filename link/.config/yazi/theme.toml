@@ -7,6 +7,12 @@ normal_alt  = { bg = "blue" }
 sep_left  = { open = "", close = "" }
 sep_right = { open = "", close = "" }
 
+[tabs]
+active   = { fg = "black", bg = "lightblue" }
+inactive = { fg = "lightblue", bg = "reset" }
+sep_inner = { open = "", close = "" }
+sep_outer = { open = "", close = "" }
+
 [icon]
 dirs = []
 files = []
