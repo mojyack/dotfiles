@@ -14,7 +14,7 @@ function keymap(mode, lhs, rhs, opts)
     vim.keymap.set(mode, lhs, rhs, opts and opts or { noremap = true, silent = true })
 end
 keymap("i", "jk", "<ESC>")
-keymap({"n", "v"}, ";", ":")
+keymap({"n", "v"}, ";", ":", {} )
 keymap({"n", "v"}, "<S-h>", "^")
 keymap({"n", "v"}, "<S-j>", "}")
 keymap({"n", "v"}, "<S-k>", "{")
