@@ -5,7 +5,7 @@ local function fetch_yanks()
     for idx, url in pairs(cx.yanked) do
         urls[idx] = tostring(url)
     end
-    ya.mgr_emit("unyank", {})
+    ya.emit("unyank", {})
     return tostring(cwd), is_cut, urls
 end
 

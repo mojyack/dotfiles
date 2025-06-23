@@ -17,7 +17,7 @@ local function toggle(self)
         ratio.current = 0
         ratio.preview = 200
     end
-    ya.app_emit("resize", {})
+    ya.emit("app:resize", {})
 end
 
 local function move(self, cmd)
@@ -34,7 +34,7 @@ local function move(self, cmd)
         ["DOWN"] = {"seek", {"+5"}},
     }
     local act = self.restore == 1 and act_preview[cmd] or act_normal[cmd]
-    ya.mgr_emit(act[1], act[2])
+    ya.emit(act[1], act[2])
 end
 
 local function entry(self, job)
