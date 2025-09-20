@@ -19,7 +19,7 @@ bar {
     position top
     font  "Hack 10"
     height 20
-    status_command ~/bin/swaybar-status-1 1
+    status_command ~/bin/swaybar-status 1
     gaps 0 24
     colors {
         statusline #e5e9f0
@@ -34,7 +34,7 @@ bar {
     position top
     font  "Hack 10"
     height 20
-    status_command ~/bin/swaybar-status-1 2
+    status_command ~/bin/swaybar-status 2
     gaps 0 8
     colors {
         statusline #e5e9f0
