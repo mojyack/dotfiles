@@ -21,7 +21,6 @@ bar {
     height 20
     status_command ~/bin/swaybar-status-1 1
     gaps 0 24
-    mode invisible
     colors {
         statusline #e5e9f0
         background #2e3440
@@ -37,7 +36,6 @@ bar {
     height 20
     status_command ~/bin/swaybar-status-1 2
     gaps 0 8
-    mode dock
     colors {
         statusline #e5e9f0
         background #2e3440
