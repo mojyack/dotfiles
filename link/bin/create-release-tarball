@@ -7,14 +7,21 @@ ver=$(git describe --tags --abbrev=0)
 ver=${ver#v*}
 proj=${PWD:t}
 
+list="/tmp/$proj-files"
+
+git ls-files > "$list"
+
 args=(
-    --transform "s/^$proj/$proj-$ver/"
-    --exclude .git
-    --exclude "$proj/build*"
-    --exclude "$proj/release*"
-    --exclude "$proj/.cache*"
+    --files-from "$list"
+    --transform "flags=r;s|^|$proj-$ver/|"
 )
 
+if [[ -e release.txt ]]; then
+    while read line; do
+        args+=$line
+    done < release.txt
+fi
+
 arc="/tmp/$proj-$ver.tar.gz"
-tar $args -zcvf "$arc" -C .. "$proj"
+tar -zcvf "$arc" $args
 echo "archive created at $arc"
