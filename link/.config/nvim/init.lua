@@ -6,6 +6,8 @@ vim.opt.completeopt = "menuone,noinsert,noselect"
 vim.opt.encoding = "utf-8"
 vim.opt.clipboard = "unnamedplus"
 vim.opt.wrap = false
+vim.opt.foldmethod = "indent"
+vim.opt.foldlevel = 99
 
 -- basic keybinds
 vim.g.mapleader = " "
