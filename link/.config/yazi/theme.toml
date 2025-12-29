@@ -3,6 +3,9 @@
 [mode]
 normal_alt  = { bg = "blue" }
 
+[indicator]
+padding = { open = " ", close = "" }
+
 [status]
 sep_left  = { open = "", close = "" }
 sep_right = { open = "", close = "" }
@@ -21,16 +24,16 @@ conds = []
 
 [filetype]
 rules = [
-    { name = "*", is = "link", fg = "lightgreen" },
-    { name = "*/", is = "link", fg = "lightgreen" },
-    { name = "*", fg = "white" },
-    { name = "*/", fg = "lightblue" },
+    { url = "*", is = "link", fg = "lightgreen" },
+    { url = "*/", is = "link", fg = "lightgreen" },
+    { url = "*", fg = "white" },
+    { url = "*/", fg = "lightblue" },
 ]
 
 [plugin]
 preloaders = []
 previewers = [
-    { name = "*/", run = "folder", sync = true },
+    { url = "*/", run = "folder", sync = true },
     { mime = "text/*", run = "code" },
     { mime = "application/{javascript,json}", run = "code" },
 ]
