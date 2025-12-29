@@ -11,7 +11,7 @@ enter = [
     { run = 'ya emit enter' },
 ]
 open_image = [
-    { run = 'imgview "$1"', desc = "Open image", for = "linux" },
+    { run = 'imgview %s1', desc = "Open image", for = "linux" },
 ]
 
 [open]
