@@ -45,7 +45,6 @@ alias mksh='(){echo "#!/bin/zsh" > $1 && chmod u+x $1 && nvim $1}'
 alias dig='(){mkdir -p "$1" && cd "$1"}'
 alias git-u='git submodule foreach git submodule update --checkout --recursive'
 alias git-syu='git submodule update --remote && git-u'
-alias git-vc='(){git diff $1\^!}'
 alias ssh!='ssh-forget-host "$(fc -nl -1)" && fc -s'
 if [[ $daemonfs == 1 ]]; then
     alias slp='doas /usr/local/bin/suspend'
