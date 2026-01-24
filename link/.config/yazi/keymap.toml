@@ -32,7 +32,7 @@ prepend_keymap = [
     { on = "P", run = ["plugin merge-paste"] },
     { on = "b", run = ["shell --interactive --cursor=16 \"togetherize %s ''\"", "escape --select"] },
     { on = "B", run = ["shell 'togetherize %s \"$(basename \"$PWD\")\"'", "escape --select"] },
-    { on = "z", run = ["shell --interactive --cursor=13 'isolate %s '", "escape --select"] },
+    { on = "z", run = ["shell --interactive --cursor=11 'isolate %s '", "escape --select"] },
 ]
 
 [input]
