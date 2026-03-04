@@ -23,6 +23,8 @@ export GNUPLOT="${XDG_DATA_HOME}/gnuplot"
 
 export CUPS_SERVERROOT="${XDG_STATE_HOME}/cups"
 
+export CLAUDE_CONFIG_DIR="${XDG_DATA_HOME}/claude"
+
 if [[ -f $ZDOTDIR/specialenv ]] {
     . "$ZDOTDIR/specialenv"
 }
