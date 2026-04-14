@@ -25,6 +25,8 @@ rules = [
     { mime = "text/*", use = [ "edit" ] },
     { mime = "inode/empty", use = [ "edit" ] },
     { url = "*.{json,xml,ebuild,js}", use = [ "edit" ] },
+    # Binary
+    { url = "*.{bin}", use = [ "edit" ] },
     # Image
     { mime = "image/*", use = [ "open_image" ] },
     # Media
