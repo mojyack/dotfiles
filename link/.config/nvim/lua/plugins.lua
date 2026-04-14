@@ -7,4 +7,5 @@ require("lazy").setup({
     require("config/clang-format"),
     require("config/autoclose"),
     require("config/black"),
+    require("config/hex"),
 }, opts)
