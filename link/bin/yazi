@@ -4,7 +4,7 @@ dir=$XDG_CONFIG_HOME/yazi/plugins
 plugins=(smart-enter)
 for plugin in $plugins; do
     if [[ ! -e $dir/$plugin.yazi ]]; then
-        ya pack -a yazi-rs/plugins:$plugin
+        ya pkg add yazi-rs/plugins:$plugin
     fi
 done
 exec /usr/bin/yazi "$@"
