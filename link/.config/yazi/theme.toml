@@ -29,11 +29,3 @@ rules = [
     { url = "*", fg = "white" },
     { url = "*/", fg = "lightblue" },
 ]
-
-[plugin]
-preloaders = []
-previewers = [
-    { url = "*/", run = "folder", sync = true },
-    { mime = "text/*", run = "code" },
-    { mime = "application/{javascript,json}", run = "code" },
-]
