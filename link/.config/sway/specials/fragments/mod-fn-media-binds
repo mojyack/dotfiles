@@ -2,7 +2,7 @@ bindsym $mod+F1         exec brightnessctl-$backlight +10
 bindsym $mod+F2         exec brightnessctl-$backlight -10
 bindsym Shift+$mod+F1   exec brightnessctl-$backlight +1
 bindsym Shift+$mod+F2   exec brightnessctl-$backlight -1
-bindsym $mod+F3         exec swaybarapp-volume +5
-bindsym $mod+F4         exec swaybarapp-volume -5
-bindsym Shift+$mod+F3   exec swaybarapp-volume +1
-bindsym Shift+$mod+F4   exec swaybarapp-volume -1
+bindsym $mod+F3         exec swaybarpp-volume +5
+bindsym $mod+F4         exec swaybarpp-volume -5
+bindsym Shift+$mod+F3   exec swaybarpp-volume +1
+bindsym Shift+$mod+F4   exec swaybarpp-volume -1
