@@ -3,7 +3,7 @@
 
 arr=($(swaymsg -pt get_outputs | grep focused))
 
-target=/tmp/brightness/$arr[2]
+target=/tmp/brightness/$arr[2]/brightness
 
 current=$(<$target)
 
