@@ -1,0 +1,21 @@
+{
+    "height": 20,
+    "position": "top",
+    "font": "Noto Sans, Font Awesome 6 Free 10",
+    "background": "#2e3440",
+    "foreground": "#e5e9f0",
+
+    "mods_left": {
+        "workspace": {},
+    },
+    "mods_right": {
+        "datetime": {"format": "%Y-%m-%d %H:%M"},
+        "temp": {"path": "/sys/class/hwmon/hwmon0/temp3_input", "format": " {}°C"},
+        "pipewire": {"format": " {}%", "format_muted": ""},
+        "file": {"path": "/tmp/brightness/DP-1/brightness", "format": " {}"},
+        "file": {"path": "/tmp/brightness/HDMI-A-1/brightness", "format": " {}"},
+        "network": {"wired": " {}", "wireless": " {}", "offline": "⚠"},
+        "ram_usage": {"format": " {}G"},
+        "cpu_usage": {"format": " {}%"},
+    }
+}
