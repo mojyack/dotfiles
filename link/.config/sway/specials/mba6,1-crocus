@@ -1,8 +1,6 @@
-include fragments/standard-status-bar
 include fragments/suspend-binds
 
-set $backlight_type acpi
-set $backlight_step 1
+set $backlight acpi
 include fragments/brightness-mediakey
 
 input 1452:656:bcm5974 {

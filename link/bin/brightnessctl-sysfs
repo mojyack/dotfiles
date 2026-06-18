@@ -1,33 +1,8 @@
-#!/bin/zsh
-# $1 sysfs path
-# $2 value
+#!/bin/bash
 
-if [[ $# < 1 ]]; then
-    exit 1
+if [[ $(stat -c "%G" $1/brightness) != "wheel" ]]; then
+    doas chgrp wheel $1/brightness
+    doas chmod g+w $1/brightness
 fi
 
-sys=$1
-
-if [[ $# < 2 ]]; then
-    exec cat $sys/brightness
-fi
-
-val=$2
-
-if [[ $val == -* || $val == +* ]]; then
-    val=$(( $(<$sys/brightness) + $val ))
-fi
-
-max_brightness=$(<$sys/max_brightness)
-if (( $val > $max_brightness )); then
-    val=$max_brightness
-elif (( $val < 0 )); then
-    val=0
-fi
-
-if [[ $(stat -c "%G" $sys/brightness) != "wheel" ]]; then
-    doas chgrp wheel $sys/brightness
-    doas chmod g+w $sys/brightness
-fi
-
-echo $val > $sys/brightness
+exec swaybarpp-brightness "$@"

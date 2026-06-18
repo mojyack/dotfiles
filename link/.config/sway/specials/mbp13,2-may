@@ -1,8 +1,6 @@
-set $backlight_type acpi
-set $backlight_step 1
+set $backlight acpi
 include fragments/brightness-mediakey
 include fragments/suspend-binds
-include fragments/standard-status-bar
 
 set $kbd_backlight_step 2
 bindsym XF86KbdBrightnessUp         exec ~/bin/brightnessctl-kbd +$kbd_backlight_step0

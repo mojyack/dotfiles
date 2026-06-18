@@ -1,0 +1,23 @@
+{
+    "height": 20,
+    "position": "top",
+    "font": "Noto Sans CJK JP, Font Awesome 6 Free 10",
+    "background": "#2e3440",
+    "foreground": "#e5e9f0",
+
+    "mods_left": {
+        "padding": {"size":8},
+        "workspace": {},
+    },
+    "mods_right": {
+        "padding": {"size":8, "on_click": ["switch-wvkbd"]},
+        "datetime": {"format": "%Y-%m-%d %H:%M", "on_click": ["switch-wvkbd"]},
+        "file": {"path": "/sys/class/backlight/ae94000.dsi.0/brightness", "format": " {}"},
+        "battery": {"name": "bq27411-0", "format": " {}%"},
+        "pipewire": {"format": " {}%", "format_muted": "", "on_click": ["swaybarpp-volume"]},
+        "temp": {"path": "/sys/class/thermal/thermal_zone1/temp", "format": " {}°C"},
+        "network": {"wired": " {}", "wireless": " {}", "offline": "⚠"},
+        "ram_usage": {"format": " {}G", "on_click": ["switch-screen-rotate"]},
+        "cpu_usage": {"format": " {}%", "on_click": ["switch-screen-rotate"]},
+    }
+}

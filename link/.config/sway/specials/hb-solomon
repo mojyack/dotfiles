@@ -1,7 +1,4 @@
-include fragments/standard-status-bar
-
-set $backlight_type gamma
-set $backlight_step 1
+set $backlight gamma
 include fragments/brightness-mediakey
 include fragments/mod-fn-media-binds
 

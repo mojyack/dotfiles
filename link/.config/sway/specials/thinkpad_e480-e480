@@ -1,8 +1,6 @@
-include fragments/standard-status-bar
 include fragments/suspend-binds
 
-set $backlight_type intel
-set $backlight_step 10
+set $backlight intel
 include fragments/brightness-mediakey
 
 output eDP-1 {

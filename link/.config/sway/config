@@ -143,12 +143,12 @@ xwayland disable
 font "Noto Sans CJK JP 10" "Noto Color Emoji 10"
 output "*" background ~/pictures/wallpaper.jpg fill
 
-bindsym XF86AudioRaiseVolume        exec ~/bin/audioctl up 5
-bindsym XF86AudioLowerVolume        exec ~/bin/audioctl down 5
-bindsym Shift+XF86AudioRaiseVolume  exec ~/bin/audioctl up 1
-bindsym Shift+XF86AudioLowerVolume  exec ~/bin/audioctl down 1
-bindsym XF86AudioMute               exec ~/bin/audioctl mute
-bindsym XF86AudioMicMute            exec ~/bin/audioctl mic-mute
+bindsym XF86AudioRaiseVolume        exec swaybarpp-volume +5
+bindsym XF86AudioLowerVolume        exec swaybarpp-volume -5
+bindsym Shift+XF86AudioRaiseVolume  exec swaybarpp-volume +1
+bindsym Shift+XF86AudioLowerVolume  exec swaybarpp-volume -1
+bindsym XF86AudioMute               exec wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
+bindsym XF86AudioMicMute            exec wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle
 
 bindsym Print                 exec grim -g "$(slurp)" - | wl-copy
 bindsym Shift+Print           exec grim -g "$(slurp)" /tmp/screenshot.png
@@ -156,5 +156,6 @@ bindsym Shift+Print           exec grim -g "$(slurp)" /tmp/screenshot.png
 set $locker 'swaylock -f -c 202020'
 bindsym $mod+o exec $locker
 #exec swayidle -w before-sleep $locker
+exec swaybarpp
 
 include special

@@ -1,7 +1,5 @@
-set $backlight_type pocket-reform
-set $backlight_step 1
+set $backlight pocket-reform
 include fragments/mod-fn-media-binds
-include fragments/standard-status-bar
 
 bindsym --locked --release $mod+F5 exec doas /usr/local/bin/suspend
 

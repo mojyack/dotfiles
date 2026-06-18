@@ -1,7 +1,4 @@
-include fragments/standard-status-bar
-
-set $backlight_type intel
-set $backlight_step 10
+set $backlight intel
 include fragments/brightness-mediakey
 
 set $built_in_display eDP-1
@@ -23,4 +20,3 @@ bindsym XF86PowerOff exec ~/bin/toggle-display-touch
 bindsym --input-device=0:0:Intel_HID_5_button_array XF86AudioRaiseVolume fullscreen disable; exec killall -s 34 wvkbd
 
 exec ~/bin/wvkbd --hidden
-
