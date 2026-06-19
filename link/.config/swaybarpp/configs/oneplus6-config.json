@@ -14,7 +14,7 @@
     "mods_right": {
         "padding": {"size":8, "on_click": ["switch-wvkbd"]},
         "datetime": {"format": "%H:%M", "on_click": ["switch-wvkbd"]},
-        "battery": {"name": "bq27411-0", "format": " {}", "style": "graph", "size": 0.3},
+        "battery": {"name": "bq27411-0", "format": " {}%", "style": "graph", "size": 0.3},
         "network": {"wired": "", "wireless": "", "offline": "⚠"},
         "pipewire": {"format": "", "format_muted": "", "on_click": ["swaybarpp-volume"]},
     }

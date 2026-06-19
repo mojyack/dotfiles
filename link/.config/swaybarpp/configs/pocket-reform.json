@@ -1,0 +1,21 @@
+{
+    "height": 20,
+    "position": "top",
+    "font": "Noto Sans CJK JP, Font Awesome 6 Free 10",
+    "background": "#2e3440",
+    "foreground": "#e5e9f0",
+
+    "mods_left": {
+        "workspace": {},
+    },
+    "mods_right": {
+        "datetime": {"format": "%Y-%m-%d %H:%M"},
+        "temp": {"path": "/sys/class/thermal/thermal_zone4/temp", "format": " {}°C"},
+        "battery": {"name": "BAT0", "format": " {}%"},
+        "pipewire": {"format": " {}%", "format_muted": ""},
+        "file": {"path": "/sys/class/backlight/mnt_pocket_reform_backlight/brightness", "format": " {}"},
+        "network": {"wired": " {}", "wireless": " {}", "offline": "⚠"},
+        "ram_usage": {"format": " {}G"},
+        "cpu_usage": {"format": " {}%"},
+    }
+}
