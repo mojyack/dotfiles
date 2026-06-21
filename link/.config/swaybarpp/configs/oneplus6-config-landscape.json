@@ -20,4 +20,4 @@
         "ram_usage": {"format": " {}G", "on_click": ["switch-screen-rotate"]},
         "cpu_usage": {"format": " {}%", "on_click": ["switch-screen-rotate"]},
     }
-}
+},

@@ -1,13 +1,30 @@
+titlebar_padding 5 6
+
 set $backlight dsi
 include fragments/brightness-mediakey
 
 output DSI-1 scale 2
 input 1739:0:Synaptics_S3706B map_to_output DSI-1
 
-bindsym --release XF86PowerOff output DSI-1 dpms toggle; input 1739:0:Synaptics_S3706B events toggle
-bindsym --release XF86PowerOff+XF86AudioRaiseVolume input 1739:0:Synaptics_S3706B events toggle
-bindsym --release XF86AudioRaiseVolume+XF86AudioLowerVolume exec /usr/local/bin/suspend
+# power -> suspend
+bindsym --release XF86PowerOff exec doas suspend
+# volume up -> brightness
+bindsym XF86AudioRaiseVolume exec brightnessctl-dsi +10
+# volume down -> volume
+bindsum XF86AudioLowerVolume exec swaybarpp-volume -10
+# power + volume up -> escape from fullscreen
+bindsym XF86PowerOff+XF86AudioRaiseVolume fullscreen disable
+# power + volume down -> (not used)
 
-bindsym --input-device=0:0:Alert_slider 1 exec switch-screen-rotate
-bindsym --input-device=0:0:Alert_slider 2 exec switch-screen-rotate
-bindsym --input-device=0:0:Alert_slider 3 fullscreen disable
+
+# slider binds, depends on keyremap
+
+# https://github.com/swaywm/sway/issues/6961
+seat * keyboard_grouping none
+
+# slider 1 -> normal mode
+bindsym --input-device=0:0:Alert_slider 1 output DSI-1 dpms on; input 1739:0:Synaptics_S3706B events enabled
+# slider 2 -> no touch
+bindsym --input-device=0:0:Alert_slider 2 output DSI-1 dpms on; input 1739:0:Synaptics_S3706B events disabled
+# slider 3 -> no touch, no screen
+bindsym --input-device=0:0:Alert_slider 3 output DSI-1 dpms off; input 1739:0:Synaptics_S3706B events disabled
