@@ -6,11 +6,11 @@
     "foreground": "#e5e9f0",
 
     "mods_left": {
-        "padding": {"size":8},
+        "padding": {"size":24},
         "workspace": {},
     },
     "mods_right": {
-        "padding": {"size":8, "on_click": ["switch-wvkbd"]},
+        "padding": {"size":24, "on_click": ["switch-wvkbd"]},
         "datetime": {"format": "%Y-%m-%d %H:%M", "on_click": ["switch-wvkbd"]},
         "file": {"path": "/sys/class/backlight/ae94000.dsi.0/brightness", "format": " {}"},
         "battery": {"name": "bq27411-0", "format": " {}%"},
