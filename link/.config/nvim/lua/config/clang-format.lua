@@ -1,8 +1,10 @@
 local filetypes = {"c", "cpp", "objc", "objcpp", "cs", "java", "javascript", "json", "proto"}
 
 local function config()
+    vim.g["clang_format#detect_style_file"] = 1
     vim.g["clang_format#code_style"] = "LLVM"
     vim.g["clang_format#style_options"] = {
+        IndentWidth = "4",
         ColumnLimit = "0", 
         BreakBeforeBraces = "Attach",
         SpaceBeforeParens = "Never", 
