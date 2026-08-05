@@ -1,5 +1,9 @@
 local function config()
-    require("hex").setup()
+    require("hex").setup {
+        is_file_binary_post_read = function()
+            return false
+        end,
+    }
 end
 
 return {
