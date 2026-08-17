@@ -16,7 +16,7 @@
         "padding": {"size":8, "on_click": ["switch-wvkbd"]},
         "datetime": {"format": "%H:%M", "on_click": ["switch-wvkbd"]},
         "battery": {"name": "bq27411-0", "format": " {}%", "style": "graph", "size": 0.3},
-        "network": {"wired": "", "wireless": "", "offline": "⚠", "on_click": ["swaybarpp-brightness", "/sys/class/backlight/ae94000.dsi.0"]},
+        "network": {"wired": "", "wireless": "", "offline": "⚠", "on_click": ["brightnessctl-dsi"]},
         "pipewire": {"format": "", "format_muted": "", "on_click": ["swaybarpp-volume"]},
     },
 }
