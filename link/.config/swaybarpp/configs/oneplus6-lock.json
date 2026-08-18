@@ -2,6 +2,7 @@
     "font": "monospace, Font Awesome 6 Free 11",
     "background": "#2e3440",
     "foreground": "#e5e9f0",
+    "scale": 1.2,
     "timeout": 15,
     "suspend_command": ["doas", "/usr/local/bin/suspend"],
 }
