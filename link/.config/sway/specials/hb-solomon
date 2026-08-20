@@ -7,20 +7,18 @@ include fragments/mod-fn-media-binds
 # here bind to on-release for a workaround to this issue.
 bindsym --release $mod+F5 output HDMI-A-1 dpms toggle; output DP-1 dpms toggle
 
-output DP-1 {
+output HDMI-A-1 {
     scale 2
     pos 0 0
     transform 180
 }
 
-output HDMI-A-1 {
+output DP-1 {
     scale 3
-    #pos 2000 0
-    transform 180
 }
 
-set $main HDMI-A-1
-set $sub DP-1
+set $main DP-1
+set $sub HDMI-A-1
 workspace 1 output $main
 workspace 2 output $main
 workspace 3 output $main
