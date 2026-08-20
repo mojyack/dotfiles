@@ -1,21 +1,13 @@
 --- @sync entry
 
 local function toggle(self)
-	local ratio = rt.mgr.ratio
-
     if self.restore == 1 then
-        ratio.parent = self.parent   
-        ratio.current = self.current  
-        ratio.preview = self.preview  
+        rt.mgr.ratio = self.ratio
         self.restore = 0
     else
-        self.parent = ratio.parent
-        self.current = ratio.current
-        self.preview = ratio.preview
+        self.ratio = rt.mgr.ratio
+        rt.mgr.ratio = {0, 0, 1}
         self.restore = 1
-        ratio.parent = 0
-        ratio.current = 0
-        ratio.preview = 200
     end
     ya.emit("app:resize", {})
 end
