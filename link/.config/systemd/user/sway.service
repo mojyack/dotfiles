@@ -11,8 +11,6 @@ Environment=LIBSEAT_BACKEND=logind
 
 Environment=MOZ_ENABLE_WAYLAND=1
 Environment=XDG_SESSION_TYPE=wayland
-Environment=GTK_IM_MODULE=fcitx
-Environment=QT_IM_MODULE=fcitx
 Environment=XMODIFIERS="@im=fcitx"
 #Environment=WLR_RENDERER=vulkan
 
