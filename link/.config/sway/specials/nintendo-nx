@@ -1,0 +1,20 @@
+titlebar_padding 5 6
+
+set $backlight backlight
+include fragments/brightness-mediakey
+
+output DSI-1 {
+    transform 270
+    scale 1.5
+}
+input 0:0:stmfts {
+    calibration_matrix 0 1 0 -1 0 1
+    map_to_output DSI-1
+}
+
+bindsym --release XF86PowerOff exec doas suspend
+
+# https://github.com/swaywm/sway/issues/6961
+seat * keyboard_grouping none
+
+bindsym --input-device=0:0:Joy-Con_Desktop equal exec switch-wvkbd
