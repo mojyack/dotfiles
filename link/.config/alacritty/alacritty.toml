@@ -1,6 +1,6 @@
 [[keyboard.bindings]]
-key = "Space"
-mods = "Shift"
+key = "/"
+mods = "Control"
 chars = "~/"
 
 [colors.bright]
