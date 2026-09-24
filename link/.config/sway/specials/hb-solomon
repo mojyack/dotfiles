@@ -8,13 +8,14 @@ include fragments/mod-fn-media-binds
 bindsym --release $mod+F5 output HDMI-A-1 dpms toggle; output DP-1 dpms toggle
 
 output HDMI-A-1 {
-    scale 2
+    scale 3
     pos 0 0
     transform 180
 }
 
 output DP-1 {
-    scale 3
+    scale 2
+    transform 180
 }
 
 set $main DP-1
