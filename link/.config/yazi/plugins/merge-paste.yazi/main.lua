@@ -2,8 +2,8 @@ local function fetch_yanks()
     local cwd = cx.active.current.cwd
     local is_cut = cx.yanked.is_cut
     local urls = {}
-    for idx, url in pairs(cx.yanked) do
-        urls[idx] = tostring(url)
+    for idx, file in pairs(cx.yanked) do
+        urls[idx] = tostring(file.url)
     end
     ya.emit("unyank", {})
     return tostring(cwd), is_cut, urls
