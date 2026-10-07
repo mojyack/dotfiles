@@ -157,5 +157,6 @@ set $locker 'swaylock -f -c 202020'
 bindsym $mod+o exec $locker
 #exec swayidle -w before-sleep $locker
 exec swaybarpp
+exec fcitx5
 
 include special
