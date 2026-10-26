@@ -12,7 +12,7 @@ input 0:0:stmfts {
     map_to_output DSI-1
 }
 
-bindsym --release XF86PowerOff exec doas suspend
+bindsym --no-repeat XF86PowerOff exec doas suspend
 
 # https://github.com/swaywm/sway/issues/6961
 seat * keyboard_grouping none
